@@ -1,35 +1,21 @@
-import React, { useState } from 'react';
+import { useTasks } from '../hooks/useTasks'
 import Task from './Task';
 
-export default function TasksList({
-  tasks,
-  onToggleDone,
-  onDeleteTask,
-  onEditTask,
-  onEditMode,
-  
-}) {
+export const TasksList = () => {
 
-const [selectedTask, setSelectedTask] = useState(null)
-
-
+  const { tasks } = useTasks()
 
   const renderTasks = (tasks) => {
-    if(tasks.length > 0) {
+    if (tasks.length > 0) {
       return tasks.map((task) => (
         <Task
-        key={task.id}
-        done={task.done}
-        title={task.title}
-        description={task.description}
-        onToggleDone={(done) => onToggleDone(task.id, done)}
-        onDeleteTask={() => onDeleteTask(task.id)}
+          key={task.id}
+          task={task}
         />
-        ))}
-      }
-  return (
-    <ul className='grid grid-col gap-4'>
-     {renderTasks(tasks)}
-    </ul>
-  );
+      ));
+    }
+  };
+  return <ul className='grid grid-col gap-4'>{renderTasks(tasks)}</ul>;
 }
+
+export default TasksList

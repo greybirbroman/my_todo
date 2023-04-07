@@ -2,39 +2,36 @@ import React, { useState } from 'react';
 import Checkbox from './Checkbox';
 
 export default function Task({
-  title,
-  description,
-  priority,
-  done,
-  onToggleDone,
-  onDeleteTask,
+  task,
+  deleteTask,
+  completeTask,
+  openEditTodoPopup
 }) {
   const [openTaskSettings, setOpenTaskSettings] = useState(false);
 
-  function doneTask() {
-    onToggleDone(!done);
-  }
 
   function toggleSettings() {
     setOpenTaskSettings(!openTaskSettings);
   }
 
+
+
   return (
     <div
       className={`flex flex-col ${
-        done ? 'bg-gray-100 opacity-70' : 'bg-yellow-200'
+        task.done ? 'bg-gray-100 opacity-70' : 'bg-yellow-200'
       } rounded-xl py-2 px-3 space-y-3`}
     >
-      <div className={`flex justify-between ${done ? 'line-through' : ''}`}>
-        <h2 className='font-semibold text-xl'>{title}</h2>
-        <div className='w-20'>{priority}</div>
+      <div className={`flex justify-between ${task.done ? 'line-through' : ''}`}>
+        <h2 className='font-semibold text-xl'>{task.title}</h2>
+        <div className='w-20'>{task.priority}</div>
         <button type='button' className='w-5 relative' onClick={toggleSettings}>
           {openTaskSettings && (
             <div className=' w-20 h-12 bg-gray-100 absolute -left-[55px] top-5 rounded-xl text-sm font-mono flex flex-col justify-center items-stratch'>
               <button type='button' className='border-b'>
                 Edit
               </button>
-              <button type='button' onClick={onDeleteTask}>
+              <button type='button' onClick={deleteTask(task.id)}>
                 Delete
               </button>
             </div>
@@ -51,7 +48,7 @@ export default function Task({
           </button>
         </button>
       </div>
-      <p className={`text-sm ${done ? 'line-through' : ''}`}>{description}</p>
+      <p className={`text-sm ${task.done ? 'line-through' : ''}`}>{task.description}</p>
       <div className='flex justify-between'>
         <ul className='space-x-1 flex'>
           <li>
@@ -62,10 +59,10 @@ export default function Task({
           </li>
         </ul>
         <div className='space-x-1 flex items-center'>
-          <span className={`text-sm font-mono ${!done && 'text-gray-500'}`}>
+          <span className={`text-sm font-mono ${!task.done && 'text-gray-500'}`}>
             done
           </span>
-          <Checkbox checked={done} onClick={doneTask}></Checkbox>
+          <Checkbox checked={task.done} onClick={() => {}}></Checkbox>
         </div>
       </div>
     </div>

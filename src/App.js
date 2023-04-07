@@ -43,15 +43,15 @@ function App() {
 
 
   // Обновить состояние задачи
-  function updateTaskDone(id) {
-    let updatedTask = [...tasks].filter((task) => {
-      if (task.id === id) {
-        task.done = !task.done;
-      }
-      return task;
-    });
-    setTasks(updatedTask);
-  }
+  // function updateTaskDone(id) {
+  //   let updatedTask = [...tasks].filter((task) => {
+  //     if (task.id === id) {
+  //       task.done = !task.done;
+  //     }
+  //     return task;
+  //   });
+  //   setTasks(updatedTask);
+  // }
 
   // Удалить задачу
   function deleteTask(id) {
@@ -71,7 +71,11 @@ function App() {
     toggleAddPopup();
   }
 
-  // Редакти
+  // Редактировать
+
+  function handleEditToDo() {
+
+  }
 
   return (
     <div className='text-gray-700 py-2 px-2 flex flex-col max-w-[992px] min-w-[400px] space-y-3'>
@@ -89,7 +93,7 @@ function App() {
 
         <TasksList
           tasks={tasks}
-          onToggleDone={updateTaskDone}
+          // completeTask={updateTaskDone}
           onDeleteTask={deleteTask}
         />
       </>
