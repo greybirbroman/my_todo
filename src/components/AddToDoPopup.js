@@ -4,7 +4,7 @@ import PriorityBar from "./PriorityBar";
 import { useFormWithValidation } from "../hooks/useForm";
 import { v4 as uuidv4 } from "uuid";
 
-export default function AddToDoPopup({ onCancel, onAdd, onEdit }) {
+export default function AddToDoPopup({ onCancel, onAdd }) {
   const { values, setValues, isValid, handleChange, errors, resetForm } =
     useFormWithValidation();
 
@@ -16,9 +16,9 @@ export default function AddToDoPopup({ onCancel, onAdd, onEdit }) {
         description: values.description,
         id: uuidv4(),
       });
-      resetForm();
     }
   }
+
 
 
   return (
@@ -29,7 +29,6 @@ export default function AddToDoPopup({ onCancel, onAdd, onEdit }) {
             Cancel
           </button>
           <button
-            onSubmit={handleSubmit}
             className={`${isValid ? 'bg-gray-500' : 'bg-gray-200'} w-20 text-white rounded-xl py-1`}
             type='submit'
             disabled={!isValid}

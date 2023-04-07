@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import Checkbox from "./Checkbox";
+import React, { useState } from 'react';
+import Checkbox from './Checkbox';
 
 export default function Task({
   title,
@@ -8,7 +8,6 @@ export default function Task({
   done,
   onToggleDone,
   onDeleteTask,
-  onEditTask
 }) {
   const [openTaskSettings, setOpenTaskSettings] = useState(false);
 
@@ -16,28 +15,23 @@ export default function Task({
     onToggleDone(!done);
   }
 
-  function toggleTaskSettings() {
+  function toggleSettings() {
     setOpenTaskSettings(!openTaskSettings);
   }
 
-  function editorMode() {
-    onEditTask(title, description)
-  }
-
-  
   return (
     <div
       className={`flex flex-col ${
-        done ? "bg-gray-100 opacity-70" : "bg-yellow-200"
+        done ? 'bg-gray-100 opacity-70' : 'bg-yellow-200'
       } rounded-xl py-2 px-3 space-y-3`}
     >
-      <div className={`flex justify-between ${done ? "line-through" : ""}`}>
+      <div className={`flex justify-between ${done ? 'line-through' : ''}`}>
         <h2 className='font-semibold text-xl'>{title}</h2>
         <div className='w-20'>{priority}</div>
-        <button type='button' className='w-5 relative'>
+        <button type='button' className='w-5 relative' onClick={toggleSettings}>
           {openTaskSettings && (
             <div className=' w-20 h-12 bg-gray-100 absolute -left-[55px] top-5 rounded-xl text-sm font-mono flex flex-col justify-center items-stratch'>
-              <button type='button' className='border-b' onClick={editorMode}>
+              <button type='button' className='border-b'>
                 Edit
               </button>
               <button type='button' onClick={onDeleteTask}>
@@ -46,7 +40,7 @@ export default function Task({
             </div>
           )}
 
-          <button type='button' className='w-5' onClick={toggleTaskSettings}>
+          <button type='button' className='w-5' onClick={toggleSettings}>
             <svg
               className='fill-gray-500'
               xmlns='http://www.w3.org/2000/svg'
@@ -57,7 +51,7 @@ export default function Task({
           </button>
         </button>
       </div>
-      <p className={`text-sm ${done ? "line-through" : ""}`}>{description}</p>
+      <p className={`text-sm ${done ? 'line-through' : ''}`}>{description}</p>
       <div className='flex justify-between'>
         <ul className='space-x-1 flex'>
           <li>
@@ -68,7 +62,7 @@ export default function Task({
           </li>
         </ul>
         <div className='space-x-1 flex items-center'>
-          <span className={`text-sm font-mono ${!done && "text-gray-500"}`}>
+          <span className={`text-sm font-mono ${!done && 'text-gray-500'}`}>
             done
           </span>
           <Checkbox checked={done} onClick={doneTask}></Checkbox>
