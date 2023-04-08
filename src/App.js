@@ -9,7 +9,7 @@ import TasksList from './components/TasksList';
 
 function App() {
 
-  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask, selectedTask} = useTasks();
+  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask, onEdit} = useTasks();
 
   const [showAddTodoModal, setShowAddTodoModal] = useState(false);
   const [showEditTodoModal, setShowEditTodoModal] = useState(false);
@@ -21,9 +21,9 @@ function App() {
     toggleModal()
   };
 
-  const handleEdit = (task) => {
+  const handleSave = (task) => {
     toggleModal()
-    selectedTask(task)
+    updateTask(task)
   }
 
 
@@ -44,6 +44,7 @@ function App() {
         onCancelClick={toggleModal}
         updateTask={updateTask}
         task={selectedTask}
+  
         />
       ) : (
         <>
@@ -52,7 +53,7 @@ function App() {
           tasks={tasks} 
           onDelete={deleteTask} 
           onToggleTaskStatus={toggleTaskStatus}
-          onEdit={handleEdit}
+          onEdit={handleSave}
           />
         </>
       )}

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Checkbox from './Checkbox';
 
-const Task = ({ task, onDelete, onToggleStatus, onEdit }) => {
+const Task = ({ task, onDelete, onToggleStatus, setSelectedTask }) => {
   const { description, title, id } = task;
   const [openTaskSettings, setOpenTaskSettings] = useState(false);
 
@@ -18,7 +18,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit }) => {
   }
 
   function handleEditClick() {
-    onEdit(task)
+    setSelectedTask(task)
   }
 
   return (
