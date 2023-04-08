@@ -9,10 +9,11 @@ import TasksList from './components/TasksList';
 
 function App() {
 
-  const { tasks, addTask, deleteTask, toggleTaskStatus } = useTasks();
+  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask, selectedTask} = useTasks();
 
   const [showAddTodoModal, setShowAddTodoModal] = useState(false);
   const [showEditTodoModal, setShowEditTodoModal] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   const addNewTask = ({ title, description }) => {
     const newTask = { id: uuidv4(), title, description, completed: false };
@@ -20,7 +21,11 @@ function App() {
     toggleModal()
   };
 
-  
+  const handleEdit = (task) => {
+    toggleModal()
+    selectedTask(task)
+  }
+
 
   function toggleModal() {
     setShowAddTodoModal(!showAddTodoModal);
@@ -37,6 +42,8 @@ function App() {
       ) : showEditTodoModal ? (
         <EditTodoModal 
         onCancelClick={toggleModal}
+        updateTask={updateTask}
+        task={selectedTask}
         />
       ) : (
         <>
@@ -44,7 +51,9 @@ function App() {
           <TasksList 
           tasks={tasks} 
           onDelete={deleteTask} 
-          onToggleTaskStatus={toggleTaskStatus}/>
+          onToggleTaskStatus={toggleTaskStatus}
+          onEdit={handleEdit}
+          />
         </>
       )}
     </div>

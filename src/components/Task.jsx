@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Checkbox from './Checkbox';
 
-const Task = ({ task, onDelete, onToggleStatus }) => {
+const Task = ({ task, onDelete, onToggleStatus, onEdit }) => {
   const { description, title, id } = task;
   const [openTaskSettings, setOpenTaskSettings] = useState(false);
 
@@ -15,6 +15,10 @@ const Task = ({ task, onDelete, onToggleStatus }) => {
 
   function handleChangeStatus() {
     onToggleStatus(id)
+  }
+
+  function handleEditClick() {
+    onEdit(task)
   }
 
   return (
@@ -33,7 +37,7 @@ const Task = ({ task, onDelete, onToggleStatus }) => {
         <button type='button' className='w-5 relative' onClick={toggleSettings}>
           {openTaskSettings && (
             <div className=' w-20 h-12 bg-gray-100 absolute -left-[55px] top-5 rounded-xl text-sm font-mono flex flex-col justify-center items-stratch'>
-              <button type='button' className='border-b'>
+              <button type='button' className='border-b' onClick={handleEditClick}>
                 Edit
               </button>
               <button type='button' onClick={handleDelete}>Delete</button>
