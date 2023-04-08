@@ -24,7 +24,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
   }
 
   return (
-    <div
+    <li
       className={`flex flex-col ${
         task.completed ? 'bg-gray-100 opacity-70' : 'bg-yellow-200'
       } rounded-xl py-2 px-3 space-y-3`}
@@ -81,7 +81,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
           <Checkbox checked={task.completed}></Checkbox>
         </div>
       </div>
-    </div>
+    </li>
   );
 };
 

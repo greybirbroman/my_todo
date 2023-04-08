@@ -21,7 +21,7 @@ function App() {
     toggleModal()
   };
 
-  const handleEditClick = (task) => {
+  const handleEditClick = () => {
     toggleModal()
     
   }
@@ -31,6 +31,8 @@ function App() {
     setShowAddTodoModal(!showAddTodoModal);
     setShowEditTodoModal(!showEditTodoModal);
   }
+
+  console.log(selectedTask)
 
 
   return (
@@ -42,7 +44,7 @@ function App() {
       ) : showEditTodoModal ? (
         <EditTodoModal 
         onCancelClick={toggleModal}
-        selectedTask={selectedTask}
+        task={selectedTask}
         />
       ) : (
         <>
