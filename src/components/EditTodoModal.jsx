@@ -17,13 +17,11 @@ const EditTodoModal = ({ onCancelClick, onSave, task }) => {
   }
 
   useEffect(() => {
-  console.log(task)
-
     setValues({
       title: task.title,
       description: task.description
     });
-  }, []);
+  }, [task]);
 
   return (
     <div>

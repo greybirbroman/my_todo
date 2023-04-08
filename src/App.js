@@ -8,8 +8,7 @@ import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
 
 function App() {
-
-  const { tasks, addTask, deleteTask, toggleTaskStatus} = useTasks();
+  const { tasks, addTask, deleteTask, toggleTaskStatus } = useTasks();
 
   const [showAddTodoModal, setShowAddTodoModal] = useState(false);
   const [showEditTodoModal, setShowEditTodoModal] = useState(false);
@@ -17,45 +16,39 @@ function App() {
 
   const addNewTask = ({ title, description }) => {
     const newTask = { id: uuidv4(), title, description, completed: false };
-    addTask(newTask)
-    toggleModal()
+    addTask(newTask);
+    toggleModal();
   };
 
   const handleEditClick = () => {
-    toggleModal()
-    
-  }
-
+    toggleModal();
+    console.log(selectedTask);
+  };
 
   function toggleModal() {
     setShowAddTodoModal(!showAddTodoModal);
     setShowEditTodoModal(!showEditTodoModal);
   }
 
-  console.log(selectedTask)
-
-
   return (
     <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-yellow-50 h-full'>
-      {showAddTodoModal ? (
-        <AddTodoModal 
-        onCancelClick={toggleModal} 
-        onAddClick={addNewTask} />
-      ) : showEditTodoModal ? (
-        <EditTodoModal 
-        onCancelClick={toggleModal}
-        task={selectedTask}
-        />
-      ) : (
+      {showAddTodoModal && (
+        <AddTodoModal onCancelClick={toggleModal} onAddClick={addNewTask} />
+        )}
+
+      {showEditTodoModal && (
+        <EditTodoModal onCancelClick={toggleModal} task={selectedTask} />
+        )}
+      {!showAddTodoModal && !setShowEditTodoModal && (
         <>
-          <AddTaskBar onAddClick={toggleModal} />
-          <TasksList 
-          tasks={tasks} 
-          onDelete={deleteTask} 
-          onToggleTaskStatus={toggleTaskStatus}
-          onEdit={handleEditClick}
-          setSelectedTask={setSelectedTask}
-          />
+        <AddTaskBar onAddClick={toggleModal} />
+          <TasksList
+            tasks={tasks}
+            onDelete={deleteTask}
+            onToggleTaskStatus={toggleTaskStatus}
+            onEdit={handleEditClick}
+            setSelectedTask={setSelectedTask}
+          /> 
         </>
       )}
     </div>
