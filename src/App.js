@@ -8,7 +8,8 @@ import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
 
 function App() {
-  const { tasks, addTask, deleteTask } = useTasks();
+
+  const { tasks, addTask, deleteTask, toggleTaskStatus } = useTasks();
 
   const [showAddTodoModal, setShowAddTodoModal] = useState(false);
   const [showEditTodoModal, setShowEditTodoModal] = useState(false);
@@ -16,30 +17,34 @@ function App() {
   const addNewTask = ({ title, description }) => {
     const newTask = { id: uuidv4(), title, description, completed: false };
     addTask(newTask)
-    toggleModalAddTodo()
+    toggleModal()
   };
 
   
 
-
-  function toggleModalAddTodo() {
+  function toggleModal() {
     setShowAddTodoModal(!showAddTodoModal);
-  }
-
-  function toggleModalEditTodo() {
     setShowEditTodoModal(!showEditTodoModal);
   }
+
 
   return (
     <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-yellow-50 h-full'>
       {showAddTodoModal ? (
-        <AddTodoModal onCancelClick={toggleModalAddTodo} onAddClick={addNewTask} />
+        <AddTodoModal 
+        onCancelClick={toggleModal} 
+        onAddClick={addNewTask} />
       ) : showEditTodoModal ? (
-        <EditTodoModal onCancelClick={toggleModalEditTodo} />
+        <EditTodoModal 
+        onCancelClick={toggleModal}
+        />
       ) : (
         <>
-          <AddTaskBar onAddClick={toggleModalAddTodo} />
-          <TasksList tasks={tasks} />
+          <AddTaskBar onAddClick={toggleModal} />
+          <TasksList 
+          tasks={tasks} 
+          onDelete={deleteTask} 
+          onToggleTaskStatus={toggleTaskStatus}/>
         </>
       )}
     </div>
