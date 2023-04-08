@@ -7,7 +7,6 @@ const useTasks = () => {
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks'));
     if (storedTasks) {
-      console.log(storedTasks);
       setTasks(storedTasks);
     }
   }, []);
@@ -17,8 +16,12 @@ const useTasks = () => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
 
-  const addTask = (newTask) => {
-    setTasks([...tasks, newTask]);
+  const addTask = (task) => {
+    setTasks((prevTasks) => {
+      const newTasks = [...prevTasks, task];
+      localStorage.setItem('tasks', JSON.stringify(newTasks))
+      return newTasks
+    })
   };
 
   const updateTask = (id, updatedTask) => {
