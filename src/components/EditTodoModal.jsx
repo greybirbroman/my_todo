@@ -1,25 +1,25 @@
 import React, { useEffect, useState } from 'react';
 import { useFormWithValidation } from '../hooks/useForm';
 
-const EditTodoModal = ({ onCancelClick, onSave, task }) => {
-  const { setValues, handleChange } = useFormWithValidation();
+const EditTodoModal = ({ onCancelClick, onSave, selectedTask }) => {
+  const { values, setValues, handleChange } = useFormWithValidation();
+  console.log(selectedTask)
 
   function handleSubmit(e) {
     e.preventDefault();
     onSave({
-        id: task.id,
-        title: task.title,
-        description: task.description,
-        completed: task.completed
-    })
+      id: selectedTask.id,
+      title: selectedTask.title,
+      description: selectedTask.description,
+      completed: selectedTask.completed,
+    });
   }
 
   useEffect(() => {
     setValues({
-        title: task.title,
-        description: task.description
-    })
-  }, [task])
+      title: selectedTask.title,
+    });
+  }, []);
 
   return (
     <div>
@@ -35,7 +35,7 @@ const EditTodoModal = ({ onCancelClick, onSave, task }) => {
           type='text'
           name='title'
           placeholder='Your title...'
-          value={task.title}
+          value={values.title}
         ></input>
         <label>Description</label>
         <textarea
@@ -43,7 +43,7 @@ const EditTodoModal = ({ onCancelClick, onSave, task }) => {
           type='text'
           name='description'
           placeholder='Your description..'
-          value={task.description}
+          value={values.description}
           rows='5'
         ></textarea>
       </form>

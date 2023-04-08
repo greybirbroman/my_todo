@@ -1,6 +1,7 @@
 import Task from './Task';
 
-export const TasksList = ({ tasks, onDelete, onToggleTaskStatus, setSelectedTask }) => {
+export const TasksList = ({ tasks, onDelete, onToggleTaskStatus, onEdit, setSelectedTask }) => {
+
 
   const renderTasks = (tasks) => {
     return tasks.map((task) => (
@@ -9,7 +10,8 @@ export const TasksList = ({ tasks, onDelete, onToggleTaskStatus, setSelectedTask
       task={task}
       onDelete={onDelete}
       onToggleStatus={onToggleTaskStatus}
-      setSelectedTask={task}
+      setSelectedTask={setSelectedTask}
+      onEdit={onEdit}
       />
       ));
     };
