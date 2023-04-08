@@ -1,12 +1,20 @@
 import React, { useState } from 'react';
 import Checkbox from './Checkbox';
 
-const Task = ({ task }) => {
-  const { description, title } = task;
+const Task = ({ task, onDelete, onToggleStatus }) => {
+  const { description, title, id } = task;
   const [openTaskSettings, setOpenTaskSettings] = useState(false);
 
   function toggleSettings() {
     setOpenTaskSettings(!openTaskSettings);
+  }
+
+  function handleDelete() {
+    onDelete(id)
+  }
+
+  function handleChangeStatus() {
+    onToggleStatus(id)
   }
 
   return (
@@ -28,7 +36,7 @@ const Task = ({ task }) => {
               <button type='button' className='border-b'>
                 Edit
               </button>
-              <button type='button'>Delete</button>
+              <button type='button' onClick={handleDelete}>Delete</button>
             </div>
           )}
 
@@ -60,6 +68,7 @@ const Task = ({ task }) => {
             className={`text-sm font-mono ${
               !task.completed && 'text-gray-500'
             }`}
+            onClick={handleChangeStatus}
           >
             done
           </span>

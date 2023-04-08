@@ -1,34 +1,54 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect} from 'react';
+
 
 const useTasks = () => {
   const [tasks, setTasks] = useState([]);
 
-  // загружаем tasks из localStorage при первоначальном рендеринге
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks'));
-    if (storedTasks.length > 0) {
+    if (storedTasks && storedTasks.length) {
       setTasks(storedTasks);
     }
   }, []);
 
-  // сохраняем tasks в localStorage при каждом изменении
-  useEffect(() => {
-    localStorage.setItem('tasks', JSON.stringify(tasks));
-  }, [tasks]);
-
   const addTask = (task) => {
-    setTasks([...tasks, task])
-  };
-
-  const updateTask = (id, updatedTask) => {
-    setTasks(tasks.map((task) => (task.id === id ? updatedTask : task)));
+    setTasks((prevTasks) => {
+      const newTasks = [...prevTasks, task];
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+      return newTasks;
+    });
   };
 
   const deleteTask = (id) => {
-    setTasks(tasks.filter((task) => task.id !== id));
+    setTasks((prevTasks) => {
+      const newTasks = prevTasks.filter((task) => task.id !== id);
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+      return newTasks;
+    });
   };
 
-  return { tasks, setTasks, addTask, updateTask, deleteTask };
+  const updateTask = (updatedTask) => {
+    setTasks((prevTasks) => {
+      const index = prevTasks.findIndex((task) => task.id === updatedTask.id);
+      const newTasks = [...prevTasks];
+      newTasks[index] = updatedTask;
+      localStorage.setItem('tasks', JSON.stringify(newTasks));
+      return newTasks;
+    });
+  };
+
+  const toggleTaskStatus = (taskId) => {
+    setTasks((prevTasks) =>
+      prevTasks.map((task) => {
+        if (task.id === taskId) {
+          return { ...task, completed: !task.completed };
+        }
+        return task;
+      })
+    );
+  };
+
+  return { tasks, addTask, deleteTask, updateTask, toggleTaskStatus };
 };
 
 export default useTasks;

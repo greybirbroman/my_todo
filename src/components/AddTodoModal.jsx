@@ -4,8 +4,6 @@ import { useFormWithValidation } from '../hooks/useForm';
 const AddTodoModal = ({ onCancelClick, onAddClick }) => {
   const { values, handleChange, resetForm } = useFormWithValidation();
 
- 
-
   function handleSubmit(e) {
     e.preventDefault();
     onAddClick({
