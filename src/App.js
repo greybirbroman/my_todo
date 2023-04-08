@@ -15,7 +15,6 @@ function App() {
 
   const addNewTask = ({ title, description }) => {
     const newTask = { id: uuidv4(), title, description, completed: false };
-    addTask(newTask);
     setTasks([...tasks, newTask]);
     localStorage.setItem('tasks', JSON.stringify([...tasks, newTask]));
     toggleModalAddTodo()
