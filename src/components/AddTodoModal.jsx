@@ -8,8 +8,8 @@ const AddTodoModal = ({ onCancelClick, onAddClick }) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    onAddClick({ ...values, [e.target.name]: e.target.value })
-    resetForm()
+    onAddClick({ title: values.title, description: values.description })
+    // resetForm()
   }
 
   return (

@@ -6,7 +6,8 @@ const useTasks = () => {
   // загружаем tasks из localStorage при первоначальном рендеринге
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks'));
-    if (storedTasks && storedTasks.length) {
+    if (storedTasks) {
+      console.log(storedTasks);
       setTasks(storedTasks);
     }
   }, []);
@@ -17,13 +18,8 @@ const useTasks = () => {
   }, [tasks]);
 
   const addTask = (newTask) => {
-    setTasks((prevTasks) => {
-      const updatedTasks = [...prevTasks, newTask];
-      localStorage.setItem('tasks', JSON.stringify(updatedTasks));
-      return updatedTasks;
-    });
+    setTasks([...tasks, newTask]);
   };
-  
 
   const updateTask = (id, updatedTask) => {
     setTasks(tasks.map((task) => (task.id === id ? updatedTask : task)));

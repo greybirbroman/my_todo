@@ -8,17 +8,19 @@ import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
 
 function App() {
-  const { tasks, setTasks } = useTasks();
+  const { tasks, addTask } = useTasks();
 
   const [showAddTodoModal, setShowAddTodoModal] = useState(false);
   const [showEditTodoModal, setShowEditTodoModal] = useState(false);
 
   const addNewTask = ({ title, description }) => {
     const newTask = { id: uuidv4(), title, description, completed: false };
-    setTasks(prevTasks => [...prevTasks, newTask]);
-    toggleModalAddTodo()
+    addTask(newTask);
   };
 
+  useEffect(() => {
+    toggleModalAddTodo();
+  }, [tasks]);
 
   function toggleModalAddTodo() {
     setShowAddTodoModal(!showAddTodoModal);
