@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
+import TagsBar from './TagsBar';
 import { useFormWithValidation } from '../hooks/useForm';
 
-const EditTodoModal = ({ onCancelClick, onEdit, selectedTask }) => {
+const EditTodoModal = ({ onCancelClick, onEdit, selectedTask, selectedTags, setSelectedTags }) => {
   const { values, setValues, handleChange } = useFormWithValidation();
 
   function handleSubmit(e) {
@@ -10,16 +11,19 @@ const EditTodoModal = ({ onCancelClick, onEdit, selectedTask }) => {
       id: selectedTask.id,
       title: values.title || selectedTask.title,
       description: values.description || selectedTask.description,
-      completed: selectedTask.completed
+      completed: selectedTask.completed,
+      category: selectedTags,
     }
     onEdit(updatedTask)
   }
+  console.log(selectedTask)
 
   useEffect(() => {
     setValues({
       title: selectedTask.title,
       description: selectedTask.description
     });
+    setSelectedTags(selectedTask.category)
   }, [selectedTask]);
 
   return (
@@ -47,6 +51,7 @@ const EditTodoModal = ({ onCancelClick, onEdit, selectedTask }) => {
           value={values.description || ''}
           rows='5'
         ></textarea>
+        <TagsBar selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
       </form>
     </div>
   );

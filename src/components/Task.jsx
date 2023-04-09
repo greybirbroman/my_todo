@@ -63,8 +63,15 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask, selecte
         {description}
       </p>
       <div className='flex justify-between'>
-        <ul className='block w-20 bg-white'>
-            <TagsList task={task}/>
+        <ul className='w-fit flex'>
+            {task.category.map((tag) => (
+              <li className='w-fit list-none py-1 px-1'>
+              <div className='flex items-center gap-1'>
+                  <div className={`w-5 h-5 rounded-full flex items-center justify-center ${tag.class}`}></div>
+                  <p className={`text-[14px] ${''}`}>{tag.name}</p>
+              </div>
+             </li>
+            ))}
         </ul>
         <div className='space-x-1 flex items-center'>
           <span
