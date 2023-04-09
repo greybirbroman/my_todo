@@ -43,7 +43,7 @@ function App() {
       )}
 
       {isModalEditOpen && (
-        <EditTodoModal onCancelClick={toggleEditModal} onEdit={updateTask} task={selectedTask} />
+        <EditTodoModal onCancelClick={toggleEditModal} onEdit={handleEditClick} task={selectedTask} />
       )}
       {!isModalAddOpen && !isModalEditOpen && (
         <>

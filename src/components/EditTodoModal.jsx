@@ -30,7 +30,7 @@ const EditTodoModal = ({ onCancelClick, onEdit, task }) => {
           <button type='button' onClick={onCancelClick}>
             Cancel
           </button>
-          <button>Edit</button>
+          <button onClick={handleSubmit} >Edit</button>
         </div>
         <input
           onChange={handleChange}
