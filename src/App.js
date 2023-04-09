@@ -6,6 +6,7 @@ import AddTodoModal from './components/AddTodoModal';
 import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
 import TagsBar from './components/TagsBar';
+import TagsList from './components/TagsList';
 
 function App() {
   const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } = useTasks();

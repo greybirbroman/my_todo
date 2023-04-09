@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import Checkbox from './Checkbox';
+import TagsList from './TagsList';
 
 const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask, selectedTags }) => {
   const { description, title, id, category } = task;
   const [openTaskSettings, setOpenTaskSettings] = useState(false);
-  console.log(task.category)
+  console.log(task)
   
 
   function toggleSettings() {
@@ -63,9 +64,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask, selecte
       </p>
       <div className='flex justify-between'>
         <ul className='block w-20 bg-white'>
-            <li className={category.class}>
-              <p className>{category.name}</p>
-            </li>
+            <TagsList task={task}/>
         </ul>
         <div className='space-x-1 flex items-center'>
           <span

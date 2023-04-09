@@ -12,7 +12,7 @@ export const TasksList = ({ tasks, onDelete, onToggleTaskStatus, onEdit, setSele
       onDelete={onDelete}
       onToggleStatus={onToggleTaskStatus}
       setSelectedTask={setSelectedTask}
-      selectedTags={selectedTags}
+      selectedTags={task.category}
       />
       ));
     };
