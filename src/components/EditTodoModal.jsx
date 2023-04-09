@@ -3,16 +3,15 @@ import { useFormWithValidation } from '../hooks/useForm';
 
 const EditTodoModal = ({ onCancelClick, onEdit, task }) => {
   const { values, setValues, handleChange } = useFormWithValidation();
+  const [newTitle, setNewTitle] = useState(task.title)
 
   console.log(task)
 
   function handleSubmit(e) {
     e.preventDefault();
     onEdit({
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      completed: task.completed,
+      ...task, 
+      title: newTitle,
     });
   }
 

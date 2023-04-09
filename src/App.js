@@ -21,11 +21,14 @@ function App() {
     toggleAddModal();
   };
 
-  const handleEditClick = ({ id, title, description, completed }) => {
+  const handleEditClick = (id) => {
     toggleEditModal();
-    const updatedTask = { id, title, description, completed }
-    updateTask(updatedTask);
-    toggleEditModal();
+    const updateTask = {
+      ...selectedTask,
+      title: selectedTask.title,
+
+    }
+    updateTask(selectedTask);
   };
 
   function toggleAddModal() {

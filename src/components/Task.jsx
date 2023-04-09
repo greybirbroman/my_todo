@@ -20,7 +20,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
 
   function handleEditClick() {
     setSelectedTask(task)
-    onEdit()
+    onEdit(id)
   }
 
   return (
