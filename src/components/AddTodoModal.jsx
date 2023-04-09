@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useFormWithValidation } from '../hooks/useForm';
 import TagsBar from './TagsBar';
 
-const AddTodoModal = ({ onCancelClick, onAddClick, selectedTags, setSelectedTags }) => {
+const AddTodoModal = ({ onCancelClick, onAddClick, selectedTags, setSelectedTags, activeTags, setActiveTags }) => {
   const { values, handleChange, resetForm } = useFormWithValidation();
 
   function handleSubmit(e) {
@@ -17,8 +17,8 @@ const AddTodoModal = ({ onCancelClick, onAddClick, selectedTags, setSelectedTags
     }
     onAddClick(newTask)
     resetForm()
-    setSelectedTags([])
   }
+
 
   return (
     <div>

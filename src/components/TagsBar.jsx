@@ -23,23 +23,20 @@ const categories = [
   },
 ];
 
-const TagsBar = ({ selectedTags, setSelectedTags}) => {
+const TagsBar = ({ selectedTags, setSelectedTags, activeTags, setActiveTags }) => {
 
-    const [activeTags, setActiveTags] = useState([]);
-    console.log(activeTags)
-  
     const handleClick = (category) => {
-      const index = activeTags.indexOf(category.name);
-      if (index === -1) {
-        setActiveTags([...activeTags, category.name]);
-        setSelectedTags([...selectedTags, category]);
-      } else {
-        const newActiveTags = [...activeTags];
-        newActiveTags.splice(index, 1);
-        setActiveTags(newActiveTags);
-        const newTags = selectedTags.filter(tag => tag.name !== category.name);
-        setSelectedTags(newTags);
-      }
+        const tagIndex = activeTags.indexOf(category.id);
+        if (tagIndex === -1) {
+          setActiveTags([...activeTags, category.id]);
+          setSelectedTags([...selectedTags, category]);
+        } else {
+          const newActiveTags = [...activeTags];
+          newActiveTags.splice(tagIndex, 1);
+          setActiveTags(newActiveTags);
+          const newTags = selectedTags.filter(tag => tag.id !== category.id);
+          setSelectedTags(newTags);
+        }
     };
   
     return (
@@ -47,7 +44,7 @@ const TagsBar = ({ selectedTags, setSelectedTags}) => {
           <span className='text-sm font-bold'>Tags:</span>
           {categories.map((category) => (
             <div className={`flex py-2 px-2 gap-2 items-center rounded-full ${
-                activeTags.includes(category.name) ? 'bg-yellow-200' : ''
+                activeTags && activeTags.includes(category.id) ? 'bg-yellow-200' : ''
               }`}>
                 <div className={`h-5 w-5 rounded-full ${category.class}`}></div>
             <button

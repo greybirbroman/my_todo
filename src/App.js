@@ -16,6 +16,7 @@ function App() {
   const [isModalEditOpen, setIsModaEditOpen] = useState(false); // Стейт для Модальных окон.
   const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
   const [selectedTags, setSelectedTags] = useState([]);
+  const [activeTags, setActiveTags] = useState('');
 
   const addNewTask = (newTask) => {
     addTask(newTask);
@@ -43,6 +44,8 @@ function App() {
           onAddClick={addNewTask}
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
+          activeTags={activeTags}
+          setActiveTags={setActiveTags}
         />
       )}
 
@@ -53,6 +56,8 @@ function App() {
           selectedTask={selectedTask}
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
+          activeTags={activeTags}
+          setActiveTags={setActiveTags}
         />
       )}
       {!isModalAddOpen && !isModalEditOpen && (
