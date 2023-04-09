@@ -1,17 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 import { useFormWithValidation } from '../hooks/useForm';
 import TagsBar from './TagsBar';
 
-const AddTodoModal = ({ onCancelClick, onAddClick }) => {
+const AddTodoModal = ({ onCancelClick, onAddClick, selectedTags, setSelectedTags }) => {
   const { values, handleChange, resetForm } = useFormWithValidation();
 
   function handleSubmit(e) {
     e.preventDefault();
-    onAddClick({
+    const newTask = {
+      id: uuidv4(),
       title: values.title,
-      description: values.description
-    })
+      description: values.description,
+      completed: false,
+      category: selectedTags,
+    }
+    onAddClick(newTask)
     resetForm()
+    setSelectedTags([])
   }
 
   return (
@@ -42,7 +48,7 @@ const AddTodoModal = ({ onCancelClick, onAddClick }) => {
           value={values.description || ''}
           rows='5'
         ></textarea>
-        <TagsBar />
+        <TagsBar selectedTags={selectedTags} setSelectedTags={setSelectedTags} />
       </form>
     </div>
   );

@@ -23,12 +23,19 @@ const categories = [
   },
 ];
 
-const TagsBar = () => {
+const TagsBar = ({ selectedTags, setSelectedTags }) => {
   const [activeCategory, setActiveCategory] = useState(null);
 
   const handleClick = (category) => {
     setActiveCategory(category);
-    //onCategoryClick(category);
+    const index = selectedTags.indexOf(category);
+    if (index === -1) {
+      setSelectedTags([...selectedTags, category]);
+    } else {
+      const newTags = [...selectedTags];
+      newTags.splice(index, 1);
+      setSelectedTags(newTags);
+    }
   };
   return (
     <div className='flex justify-start mt-8'>
@@ -36,10 +43,11 @@ const TagsBar = () => {
         <span className='text-sm font-bold'>Tags:</span>
         {categories.map((category, index) => (
           <button
+            type='button'
             key={index}
             className={`${
               activeCategory === category ? 'bg-gray-200' : category.class
-            } py-2 px-4 rounded-full font-bold`}
+            } py-2 px-4 rounded-full font-bold ${category.class}`}
             onClick={() => handleClick(category)}
           >
             {category.name}
