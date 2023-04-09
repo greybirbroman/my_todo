@@ -8,47 +8,53 @@ import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
 
 function App() {
-  const { tasks, addTask, deleteTask, toggleTaskStatus } = useTasks();
+  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } = useTasks();
 
-  const [showAddTodoModal, setShowAddTodoModal] = useState(false);
-  const [showEditTodoModal, setShowEditTodoModal] = useState(false);
-  const [selectedTask, setSelectedTask] = useState(null);
+  const [isModalAddOpen, setIsModaAddOpen] = useState(false); // Стейт для Модальных окон.
+  const [isModalEditOpen, setIsModaEditOpen] = useState(false); // Стейт для Модальных окон.
+
+  const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
 
   const addNewTask = ({ title, description }) => {
     const newTask = { id: uuidv4(), title, description, completed: false };
     addTask(newTask);
-    toggleModal();
+    toggleAddModal();
   };
 
-  const handleEditClick = () => {
-    toggleModal();
-    console.log(selectedTask);
+  const handleEditClick = ({ id, title, description, completed }) => {
+    toggleEditModal();
+    const updatedTask = { id, title, description, completed }
+    updateTask(updatedTask);
+    toggleEditModal();
   };
 
-  function toggleModal() {
-    setShowAddTodoModal(!showAddTodoModal);
-    setShowEditTodoModal(!showEditTodoModal);
+  function toggleAddModal() {
+    setIsModaAddOpen(!isModalAddOpen);
+  }
+
+  function toggleEditModal() {
+    setIsModaEditOpen(!isModalEditOpen);
   }
 
   return (
     <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-yellow-50 h-full'>
-      {showAddTodoModal && (
-        <AddTodoModal onCancelClick={toggleModal} onAddClick={addNewTask} />
-        )}
+      {isModalAddOpen && (
+        <AddTodoModal onCancelClick={toggleAddModal} onAddClick={addNewTask} />
+      )}
 
-      {showEditTodoModal && (
-        <EditTodoModal onCancelClick={toggleModal} task={selectedTask} />
-        )}
-      {!showAddTodoModal && !setShowEditTodoModal && (
+      {isModalEditOpen && (
+        <EditTodoModal onCancelClick={toggleEditModal} onEdit={updateTask} task={selectedTask} />
+      )}
+      {!isModalAddOpen && !isModalEditOpen && (
         <>
-        <AddTaskBar onAddClick={toggleModal} />
+          <AddTaskBar onAddClick={toggleAddModal} />
           <TasksList
             tasks={tasks}
             onDelete={deleteTask}
             onToggleTaskStatus={toggleTaskStatus}
             onEdit={handleEditClick}
             setSelectedTask={setSelectedTask}
-          /> 
+          />
         </>
       )}
     </div>

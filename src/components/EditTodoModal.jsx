@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { useFormWithValidation } from '../hooks/useForm';
 
-const EditTodoModal = ({ onCancelClick, onSave, task }) => {
+const EditTodoModal = ({ onCancelClick, onEdit, task }) => {
   const { values, setValues, handleChange } = useFormWithValidation();
 
   console.log(task)
 
   function handleSubmit(e) {
     e.preventDefault();
-    onSave({
+    onEdit({
       id: task.id,
       title: task.title,
       description: task.description,
