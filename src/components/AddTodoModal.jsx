@@ -1,5 +1,6 @@
 import React from 'react';
 import { useFormWithValidation } from '../hooks/useForm';
+import TagsBar from './TagsBar';
 
 const AddTodoModal = ({ onCancelClick, onAddClick }) => {
   const { values, handleChange, resetForm } = useFormWithValidation();
@@ -41,6 +42,7 @@ const AddTodoModal = ({ onCancelClick, onAddClick }) => {
           value={values.description || ''}
           rows='5'
         ></textarea>
+        <TagsBar />
       </form>
     </div>
   );

@@ -1,26 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { useFormWithValidation } from '../hooks/useForm';
 
-const EditTodoModal = ({ onCancelClick, onEdit, task }) => {
+const EditTodoModal = ({ onCancelClick, onEdit, selectedTask }) => {
   const { values, setValues, handleChange } = useFormWithValidation();
-  const [newTitle, setNewTitle] = useState(task.title)
-
-  console.log(task)
 
   function handleSubmit(e) {
     e.preventDefault();
-    onEdit({
-      ...task, 
-      title: newTitle,
-    });
+    const updatedTask = {
+      id: selectedTask.id,
+      title: values.title || selectedTask.title,
+      description: values.description || selectedTask.description,
+      completed: selectedTask.completed
+    }
+    onEdit(updatedTask)
   }
 
   useEffect(() => {
     setValues({
-      title: task.title,
-      description: task.description
+      title: selectedTask.title,
+      description: selectedTask.description
     });
-  }, [task]);
+  }, [selectedTask]);
 
   return (
     <div>
@@ -29,14 +29,14 @@ const EditTodoModal = ({ onCancelClick, onEdit, task }) => {
           <button type='button' onClick={onCancelClick}>
             Cancel
           </button>
-          <button onClick={handleSubmit} >Edit</button>
+          <button type='button'>Edit</button>
         </div>
         <input
           onChange={handleChange}
           type='text'
           name='title'
           placeholder='Your title...'
-          value={values.title}
+          value={values.title || ''}
         ></input>
         <label>Description</label>
         <textarea
@@ -44,7 +44,7 @@ const EditTodoModal = ({ onCancelClick, onEdit, task }) => {
           type='text'
           name='description'
           placeholder='Your description..'
-          value={values.description}
+          value={values.description || ''}
           rows='5'
         ></textarea>
       </form>

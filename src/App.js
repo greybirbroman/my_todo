@@ -6,6 +6,7 @@ import AddTaskBar from './components/AddTaskBar';
 import AddTodoModal from './components/AddTodoModal';
 import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
+import TagsBar from './components/TagsBar';
 
 function App() {
   const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } = useTasks();
@@ -21,14 +22,10 @@ function App() {
     toggleAddModal();
   };
 
-  const handleEditClick = (id) => {
+  const editTask = (editedTask) => {
     toggleEditModal();
-    const updateTask = {
-      ...selectedTask,
-      title: selectedTask.title,
-
-    }
-    updateTask(selectedTask);
+    updateTask(editedTask);
+    toggleEditModal()
   };
 
   function toggleAddModal() {
@@ -46,7 +43,7 @@ function App() {
       )}
 
       {isModalEditOpen && (
-        <EditTodoModal onCancelClick={toggleEditModal} onEdit={handleEditClick} task={selectedTask} />
+        <EditTodoModal onCancelClick={toggleEditModal} onEdit={editTask} selectedTask={selectedTask} />
       )}
       {!isModalAddOpen && !isModalEditOpen && (
         <>
@@ -55,9 +52,10 @@ function App() {
             tasks={tasks}
             onDelete={deleteTask}
             onToggleTaskStatus={toggleTaskStatus}
-            onEdit={handleEditClick}
+            onEdit={toggleEditModal}
             setSelectedTask={setSelectedTask}
           />
+          <TagsBar />
         </>
       )}
     </div>

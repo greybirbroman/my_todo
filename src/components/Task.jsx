@@ -61,14 +61,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
         {description}
       </p>
       <div className='flex justify-between'>
-        <ul className='space-x-1 flex'>
-          <li>
-            <div className='h-5 w-5 bg-yellow-700 rounded-full'></div>
-          </li>
-          <li>
-            <div className='h-5 w-5 bg-red-700 rounded-full'></div>
-          </li>
-        </ul>
+        
         <div className='space-x-1 flex items-center'>
           <span
             className={`text-sm font-mono ${
