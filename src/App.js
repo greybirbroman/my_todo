@@ -17,6 +17,7 @@ function App() {
   const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
   const [selectedTags, setSelectedTags] = useState([]);
   const [activeTags, setActiveTags] = useState('');
+  const [priority, setPriority] = useState('')
 
   const addNewTask = (newTask) => {
     addTask(newTask);
@@ -37,7 +38,7 @@ function App() {
   }
 
   return (
-    <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-yellow-50 h-full'>
+    <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-yellow-50 h-[100vh]'>
       {isModalAddOpen && (
         <AddTodoModal
           onCancelClick={toggleAddModal}
@@ -46,6 +47,8 @@ function App() {
           setSelectedTags={setSelectedTags}
           activeTags={activeTags}
           setActiveTags={setActiveTags}
+          priority={priority}
+          setPriority={setPriority}
         />
       )}
 
@@ -58,6 +61,8 @@ function App() {
           setSelectedTags={setSelectedTags}
           activeTags={activeTags}
           setActiveTags={setActiveTags}
+          priority={priority}
+          setPriority={setPriority}
         />
       )}
       {!isModalAddOpen && !isModalEditOpen && (
@@ -70,6 +75,7 @@ function App() {
             onEdit={toggleEditModal}
             setSelectedTask={setSelectedTask}
             selectedTags={selectedTags}
+            priority={priority}
           />
         </>
       )}

@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import Checkbox from './Checkbox';
-import TagsList from './TagsList';
+import CheckboxLabel from './CheckboxLabel';
+import { useFormWithValidation } from '../hooks/useForm';
 
-const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask, selectedTags }) => {
-  const { description, title, id, category } = task;
-  const [openTaskSettings, setOpenTaskSettings] = useState(false);
-  console.log(task)
-  
+const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
+  const { description, title, id, category, priority } = task;
+  const [openTaskSettings, setOpenTaskSettings] = useState(false);  
+  console.log(task.completed);
+ 
 
   function toggleSettings() {
     setOpenTaskSettings(!openTaskSettings);
@@ -25,11 +25,17 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask, selecte
     onEdit(id)
   }
 
+ function getTaskColorByPriority(priority) {
+    if(priority === 'medium') return 'bg-yellow-200'
+    if(priority === 'low') return 'bg-green-200'
+    return 'bg-red-200'
+  }
+
   return (
     <li
-      className={`flex flex-col ${
-        task.completed ? 'bg-gray-100 opacity-70' : 'bg-yellow-200'
-      } rounded-xl py-2 px-3 space-y-3`}
+      className={`w-full ${
+        task.completed ? 'bg-gray-100 opacity-70' : getTaskColorByPriority(priority)
+      } rounded-xl py-2 px-3 space-y-3 border border-gray-600 shadow-lg`}
     >
       <div
         className={`flex justify-between ${
@@ -37,7 +43,6 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask, selecte
         }`}
       >
         <h2 className='font-semibold text-xl'>{title}</h2>
-        <div className='w-20'>{task.priority}</div>
         <button type='button' className='w-5 relative' onClick={toggleSettings}>
           {openTaskSettings && (
             <div className=' w-20 h-12 bg-gray-100 absolute -left-[55px] top-5 rounded-xl text-sm font-mono flex flex-col justify-center items-stratch'>
@@ -59,13 +64,15 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask, selecte
           </button>
         </button>
       </div>
-      <p className={`text-sm ${task.completed ? 'line-through' : ''}`}>
+      <div>
+      <p className={`flex flex-wrap text-sm ${task.completed ? 'line-through' : ''}`}>
         {description}
       </p>
+      </div>
       <div className='flex justify-between'>
         <ul className='w-fit flex'>
-            {task.category.map((tag) => (
-              <li className='w-fit list-none py-1 px-1'>
+            {category.map((tag) => (
+              <li key={tag.id} className='w-fit list-none py-1 px-1'>
               <div className='flex items-center gap-1'>
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center ${tag.class}`}></div>
                   <p className={`text-[14px] ${''}`}>{tag.name}</p>
@@ -73,16 +80,17 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask, selecte
              </li>
             ))}
         </ul>
-        <div className='space-x-1 flex items-center'>
+        <div 
+        className='space-x-1 flex items-center'
+        >
           <span
             className={`text-sm font-mono ${
               !task.completed && 'text-gray-500'
             }`}
-            onClick={handleChangeStatus}
           >
             done
           </span>
-          <Checkbox checked={task.completed}></Checkbox>
+          <CheckboxLabel checked={task.completed} onClick={handleChangeStatus}></CheckboxLabel>
         </div>
       </div>
     </li>

@@ -22,7 +22,7 @@ const useTasks = () => {
 
   const addTask = (task) => {
     setTasks((prevTasks) => {
-      const newTasks = [...prevTasks, task];
+      const newTasks = [task, ...prevTasks];
       localStorage.setItem('tasks', JSON.stringify(newTasks));
       return newTasks;
     });
