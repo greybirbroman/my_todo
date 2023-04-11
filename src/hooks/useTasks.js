@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react';
 
 const useTasks = () => {
   const [tasks, setTasks] = useState([]);
-  const [selectedTask, setSelectedTask] = useState(null)
   
   // Вызывается при первой загрузке страницы 
   // и извлекает задачи из локального хранилища, если они там сохранены.

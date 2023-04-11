@@ -5,8 +5,7 @@ import AddTaskBar from './components/AddTaskBar';
 import AddTodoModal from './components/AddTodoModal';
 import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
-import TagsBar from './components/TagsBar';
-import TagsList from './components/TagsList';
+import FilterSelect from './components/FilterSelect';
 
 function App() {
   const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } =
@@ -38,7 +37,7 @@ function App() {
   }
 
   return (
-    <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-yellow-50 h-[100vh]'>
+    <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-yellow-50'>
       {isModalAddOpen && (
         <AddTodoModal
           onCancelClick={toggleAddModal}
@@ -68,6 +67,7 @@ function App() {
       {!isModalAddOpen && !isModalEditOpen && (
         <>
           <AddTaskBar onAddClick={toggleAddModal} />
+          <FilterSelect />
           <TasksList
             tasks={tasks}
             onDelete={deleteTask}

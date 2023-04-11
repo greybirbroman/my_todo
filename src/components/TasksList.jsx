@@ -31,7 +31,7 @@ export const TasksList = ({
   };
 
   return (
-    <ul className='flex flex-wrap sm:flex-col items-start justify-center gap-3 pt-20'>
+    <ul className='grid grid-cols-2 sm:grid-cols-1 items-start justify-center gap-3 pt-20 sm:pt-10'>
       {renderTasks(tasks)}
     </ul>
   );

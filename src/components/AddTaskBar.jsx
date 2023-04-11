@@ -4,7 +4,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 const AddTaskBar = ({ onAddClick }) => {
   return (
-    <div className='flex justify-between text-2xl'>
+    <div className='flex justify-between text-2xl pb-5'>
       <h1>todo's</h1>
       <Button
         sx={{ fontFamily: 'poppins', border: '1px solid gray' }}

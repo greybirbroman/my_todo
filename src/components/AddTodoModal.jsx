@@ -15,6 +15,7 @@ const AddTodoModal = ({
   setPriority,
 }) => {
   const { values, handleChange, resetForm, isValid } = useFormWithValidation();
+  console.log(isValid)
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -38,7 +39,7 @@ const AddTodoModal = ({
   }, []);
 
   return (
-    <div className='w-3/4 mx-auto my-auto py-10 px-10 bg-yellow-100 rounded-2xl'>
+    <div className='w-full mx-auto my-auto py-10 px-10 bg-yellow-100 rounded-2xl'>
       <form className='flex flex-col' onSubmit={handleSubmit}>
         {/* { buttonsArea } */}
         <div className='flex justify-between pb-10'>
@@ -51,8 +52,8 @@ const AddTodoModal = ({
           </button>
           <button
             className={`${
-              !isValid ? 'bg-none text-gray-500' : ''
-            }bg-green-200 py-2 px-2 rounded-xl font-semibold border border-gray-600`}
+              !isValid ? 'text-gray-500 border-gray-500' : 'text-gray-700 bg-green-200'
+            } py-2 px-2 rounded-xl font-semibold border border-gray-600`}
             type='button'
             onClick={handleSubmit}
             disabled={!isValid}
