@@ -8,7 +8,7 @@ import TasksList from './components/TasksList';
 import FilterSelect from './components/FilterSelect';
 
 function App() {
-  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } =
+  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask, filterTasks } =
     useTasks();
 
   const [isModalAddOpen, setIsModaAddOpen] = useState(false); // Стейт для Модальных окон.
@@ -67,7 +67,7 @@ function App() {
       {!isModalAddOpen && !isModalEditOpen && (
         <>
           <AddTaskBar onAddClick={toggleAddModal} />
-          <FilterSelect />
+          <FilterSelect onFilter={filterTasks}/>
           <TasksList
             tasks={tasks}
             onDelete={deleteTask}

@@ -10,6 +10,7 @@ const FilterSelect = ({ onFilter }) => {
 
   const handleChange = (event) => {
     setCategory(event.target.value);
+    onFilter()
   };
 
   const handleFilter = () => {

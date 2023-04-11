@@ -1,7 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 const useTasks = () => {
   const [tasks, setTasks] = useState([]);
+  const [filter, setFilter] = useState('done')
   
   // Вызывается при первой загрузке страницы 
   // и извлекает задачи из локального хранилища, если они там сохранены.
@@ -56,7 +57,18 @@ const useTasks = () => {
     );
   };
 
-  return { tasks, addTask, deleteTask, updateTask, toggleTaskStatus };
+  const filterTasks = useMemo(() => {
+    if (filter === 'all') {
+      return tasks;
+    } else if (filter === 'completed') {
+      return tasks.filter(task => task.completed);
+    } else if (filter === 'not-completed') {
+      return tasks.filter(task => !task.completed);
+    }
+  }, [tasks, filter])
+
+
+  return { tasks, addTask, deleteTask, updateTask, toggleTaskStatus, filterTasks };
 };
 
 export default useTasks;
