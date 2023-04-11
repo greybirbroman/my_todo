@@ -2,13 +2,13 @@ import { useState, useEffect, useMemo } from 'react';
 
 const useTasks = () => {
   const [tasks, setTasks] = useState([]);
-  const [filter, setFilter] = useState('done')
-  
-  // Вызывается при первой загрузке страницы 
+
+  // Вызывается при первой загрузке страницы
   // и извлекает задачи из локального хранилища, если они там сохранены.
   // Полученные задачи устанавливаются в состояние tasks, используя функцию setTasks
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks'));
+
     if (storedTasks && storedTasks.length) {
       setTasks(storedTasks);
     }
@@ -19,18 +19,8 @@ const useTasks = () => {
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
-  
-  const filterTasks = useMemo(() => {
-    if (filter === 'active') {
-      return tasks;
-    } else if (filter === 'done') {
-      return tasks.filter(task => task.completed);
-    } else if (filter === 'work') {
-      return tasks.filter(task => task.category === 'work');
-    }
-  }, [tasks, filter])
 
-  
+
   const addTask = (task) => {
     setTasks((prevTasks) => {
       const newTasks = [task, ...prevTasks];
@@ -68,9 +58,14 @@ const useTasks = () => {
     );
   };
 
-
-
-  return { tasks, addTask, deleteTask, updateTask, toggleTaskStatus, filterTasks };
+  return {
+    tasks,
+    setTasks,
+    addTask,
+    deleteTask,
+    updateTask,
+    toggleTaskStatus,
+  };
 };
 
 export default useTasks;

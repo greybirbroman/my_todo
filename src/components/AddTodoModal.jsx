@@ -15,7 +15,6 @@ const AddTodoModal = ({
   setPriority,
 }) => {
   const { values, handleChange, resetForm, isValid } = useFormWithValidation();
-  console.log(isValid)
 
   function handleSubmit(e) {
     e.preventDefault();

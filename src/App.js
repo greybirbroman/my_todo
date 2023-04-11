@@ -8,9 +8,7 @@ import TasksList from './components/TasksList';
 import FilterSelect from './components/FilterSelect';
 
 function App() {
-  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask, filterTasks } =
-    useTasks();
-
+  
   const [isModalAddOpen, setIsModaAddOpen] = useState(false); // Стейт для Модальных окон.
   const [isModalEditOpen, setIsModaEditOpen] = useState(false); // Стейт для Модальных окон.
   const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
@@ -18,7 +16,10 @@ function App() {
   const [activeTags, setActiveTags] = useState('');
   const [priority, setPriority] = useState('')
   const [filter, setFilter] = useState('active')
-
+  
+  const { tasks, setTasks, addTask, deleteTask, toggleTaskStatus, updateTask, filterTasks } =
+    useTasks();
+    
   const addNewTask = (newTask) => {
     addTask(newTask);
     toggleAddModal();
@@ -37,8 +38,9 @@ function App() {
     setIsModaEditOpen(!isModalEditOpen);
   }
 
-  function handleFilterTasks () {
-    filterTasks(filter)
+  function handleFilterTasks (filter) {
+    const filteredTasks = filterTasks(filter)
+    setTasks(filteredTasks)
   }
 
   return (
@@ -81,6 +83,7 @@ function App() {
             setSelectedTask={setSelectedTask}
             selectedTags={selectedTags}
             priority={priority}
+            filter={filter}
           />
         </>
       )}

@@ -6,15 +6,14 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 const FilterSelect = ({ onFilter, filter, setFilter }) => {
-  console.log(filter);
 
   const handleChange = (event) => {
     setFilter(event.target.value);
     handleFilter(event.target.value);
   };
 
-  const handleFilter = (selectedFilter) => {
-    onFilter(selectedFilter);
+  const handleFilter = (filter) => {
+    onFilter(filter);
   };
 
   return (
@@ -29,11 +28,8 @@ const FilterSelect = ({ onFilter, filter, setFilter }) => {
           onChange={handleChange}
         >
           <MenuItem value='active'>Active</MenuItem>
-          <MenuItem value='done'>Done</MenuItem>
-          <MenuItem value='work'>Work</MenuItem>
-          <MenuItem value='study'>Study</MenuItem>
-          <MenuItem value='entertainment'>Entertainment</MenuItem>
-          <MenuItem value='shopping'>Shopping</MenuItem>
+          <MenuItem value='completed'>Done</MenuItem>
+          
         </Select>
       </FormControl>
     </Box>
