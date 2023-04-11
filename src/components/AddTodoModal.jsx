@@ -51,7 +51,7 @@ const AddTodoModal = ({
           </button>
           <button
             className={`${
-              !isValid ? 'bg-none' : ''
+              !isValid ? 'bg-none text-gray-500' : ''
             }bg-green-200 py-2 px-2 rounded-xl font-semibold border border-gray-600`}
             type='button'
             onClick={handleSubmit}
