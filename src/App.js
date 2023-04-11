@@ -17,6 +17,7 @@ function App() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [activeTags, setActiveTags] = useState('');
   const [priority, setPriority] = useState('')
+  const [filter, setFilter] = useState('active')
 
   const addNewTask = (newTask) => {
     addTask(newTask);
@@ -34,6 +35,10 @@ function App() {
 
   function toggleEditModal() {
     setIsModaEditOpen(!isModalEditOpen);
+  }
+
+  function handleFilterTasks () {
+    filterTasks(filter)
   }
 
   return (
@@ -67,7 +72,7 @@ function App() {
       {!isModalAddOpen && !isModalEditOpen && (
         <>
           <AddTaskBar onAddClick={toggleAddModal} />
-          <FilterSelect onFilter={filterTasks}/>
+          <FilterSelect onFilter={handleFilterTasks} filter={filter} setFilter={setFilter}/>
           <TasksList
             tasks={tasks}
             onDelete={deleteTask}

@@ -13,13 +13,24 @@ const useTasks = () => {
       setTasks(storedTasks);
     }
   }, []);
-// Вызывается каждый раз, когда состояние tasks изменяется.
-// Он сохраняет текущее состояние tasks в локальное хранилище, используя функцию localStorage.setItem().
-// Данный эффект обеспечивает сохранение задач после добавления, удаления или изменения задачи.
+  // Вызывается каждый раз, когда состояние tasks изменяется.
+  // Он сохраняет текущее состояние tasks в локальное хранилище, используя функцию localStorage.setItem().
+  // Данный эффект обеспечивает сохранение задач после добавления, удаления или изменения задачи.
   useEffect(() => {
     localStorage.setItem('tasks', JSON.stringify(tasks));
   }, [tasks]);
+  
+  const filterTasks = useMemo(() => {
+    if (filter === 'active') {
+      return tasks;
+    } else if (filter === 'done') {
+      return tasks.filter(task => task.completed);
+    } else if (filter === 'work') {
+      return tasks.filter(task => task.category === 'work');
+    }
+  }, [tasks, filter])
 
+  
   const addTask = (task) => {
     setTasks((prevTasks) => {
       const newTasks = [task, ...prevTasks];
@@ -57,15 +68,6 @@ const useTasks = () => {
     );
   };
 
-  const filterTasks = useMemo(() => {
-    if (filter === 'all') {
-      return tasks;
-    } else if (filter === 'completed') {
-      return tasks.filter(task => task.completed);
-    } else if (filter === 'not-completed') {
-      return tasks.filter(task => !task.completed);
-    }
-  }, [tasks, filter])
 
 
   return { tasks, addTask, deleteTask, updateTask, toggleTaskStatus, filterTasks };

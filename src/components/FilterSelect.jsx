@@ -5,18 +5,18 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
-const FilterSelect = ({ onFilter }) => {
-  const [category, setCategory] = useState('');
+const FilterSelect = ({ onFilter, filter, setFilter }) => {
+  console.log(filter);
 
   const handleChange = (event) => {
-    setCategory(event.target.value);
-    onFilter()
+    setFilter(event.target.value);
+    handleFilter(event.target.value);
   };
 
-  const handleFilter = () => {
-    onFilter(category)
-  }
- 
+  const handleFilter = (selectedFilter) => {
+    onFilter(selectedFilter);
+  };
+
   return (
     <Box sx={{ maxWidth: 120 }}>
       <FormControl size='small' fullWidth>
@@ -24,16 +24,16 @@ const FilterSelect = ({ onFilter }) => {
         <Select
           labelId='demo-simple-select-label'
           id='demo-simple-select'
-          value={category}
+          value={filter}
           label='Age'
           onChange={handleChange}
         >
-          <MenuItem onClick={handleFilter} value={10}>Active</MenuItem>
-          <MenuItem onClick={handleFilter} value={20}>Done</MenuItem>
-          <MenuItem onClick={handleFilter} value={30}>Work</MenuItem>
-          <MenuItem onClick={handleFilter} value={30}>Study</MenuItem>
-          <MenuItem onClick={handleFilter} value={30}>Entertainment</MenuItem>
-          <MenuItem onClick={handleFilter} value={30}>Shopping</MenuItem>
+          <MenuItem value='active'>Active</MenuItem>
+          <MenuItem value='done'>Done</MenuItem>
+          <MenuItem value='work'>Work</MenuItem>
+          <MenuItem value='study'>Study</MenuItem>
+          <MenuItem value='entertainment'>Entertainment</MenuItem>
+          <MenuItem value='shopping'>Shopping</MenuItem>
         </Select>
       </FormControl>
     </Box>
