@@ -5,7 +5,6 @@ import TaskSettings from './TaskSettings';
 
 const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
   const { description, title, id, category, priority } = task;
-
  
   function handleDelete() {
     onDelete(id)

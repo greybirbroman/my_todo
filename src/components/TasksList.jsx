@@ -1,3 +1,5 @@
+import { useMemo } from 'react';
+import { categories } from "../utils/const";
 import Task from './Task';
 import noTask from '../images/no-task.png';
 
@@ -10,19 +12,27 @@ export const TasksList = ({
   priority,
   filter,
 }) => {
-  const renderTasks = (tasks, filter) => {
-    let filteredTasks = tasks;
+
+  const filteredTasks = useMemo(() => {
     switch (filter) {
+      case 'all':
+        return tasks;
       case 'active':
-        filteredTasks = tasks.filter((task) => !task.completed);
-        break;
+        return tasks.filter((task) => !task.completed);
+      case 'work':
+        return tasks.filter((task) => task.category && task.category.name === 'Work');
       case 'completed':
-        filteredTasks = tasks.filter((task) => task.completed);
-        break;
-      // Другие кейсы
+        return tasks.filter((task) => task.completed);
+      case 'low':
+        return tasks.filter((task) => task.priority === 'low');
       default:
-        filteredTasks = tasks;
+        return tasks;
     }
+  }, [tasks, filter]);
+ 
+  
+
+  const renderTasks = (tasks) => {
     if (tasks.length) {
       return tasks.map((task) => (
         <Task
@@ -37,20 +47,7 @@ export const TasksList = ({
         />
       ));
     }
-    if (filteredTasks.length) {
-      return filteredTasks.map((task) => (
-        <Task
-          key={task.id}
-          task={task}
-          onEdit={onEdit}
-          onDelete={onDelete}
-          onToggleStatus={onToggleTaskStatus}
-          setSelectedTask={setSelectedTask}
-          selectedTags={task.category}
-          priority={priority}
-        />
-      ));
-    }
+
     return (
       <div className='w-full h-full flex items-center justify-center'>
         <img src={noTask} alt='no_tasks' className='object-cover pt-20' />
@@ -60,7 +57,7 @@ export const TasksList = ({
 
   return (
     <ul className='grid grid-cols-2 sm:grid-cols-1 items-start justify-center gap-3 pt-20 sm:pt-10'>
-      {renderTasks(tasks, filter)}
+      {renderTasks(filteredTasks)}
     </ul>
   );
 };

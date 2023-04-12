@@ -24,11 +24,15 @@ const FilterSelect = ({ onFilter, filter, setFilter }) => {
           labelId='demo-simple-select-label'
           id='demo-simple-select'
           value={filter}
-          label='Age'
+          label='Filter'
           onChange={handleChange}
         >
+          <MenuItem value='all'>All</MenuItem>
           <MenuItem value='active'>Active</MenuItem>
           <MenuItem value='completed'>Done</MenuItem>
+          <MenuItem value='low'>Low priority</MenuItem>
+          <MenuItem value='work'>Work</MenuItem>
+
           
         </Select>
       </FormControl>

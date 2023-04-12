@@ -15,9 +15,9 @@ function App() {
   const [selectedTags, setSelectedTags] = useState([]);
   const [activeTags, setActiveTags] = useState('');
   const [priority, setPriority] = useState('')
-  const [filter, setFilter] = useState('active')
+  const [filter, setFilter] = useState('all')
   
-  const { tasks, setTasks, addTask, deleteTask, toggleTaskStatus, updateTask, filterTasks } =
+  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } =
     useTasks();
     
   const addNewTask = (newTask) => {
@@ -38,9 +38,8 @@ function App() {
     setIsModaEditOpen(!isModalEditOpen);
   }
 
-  function handleFilterTasks (filter) {
-    const filteredTasks = filterTasks(filter)
-    setTasks(filteredTasks)
+  function handleFilterTasks(filter) {
+    setFilter(filter)
   }
 
   return (
