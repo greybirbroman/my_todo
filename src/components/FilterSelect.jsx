@@ -17,9 +17,9 @@ const FilterSelect = ({ onFilter, filter, setFilter }) => {
   };
 
   return (
-    <Box sx={{ maxWidth: 120 }}>
-      <FormControl size='small' fullWidth>
-        <InputLabel id='demo-simple-select-label'>Filter</InputLabel>
+    <Box sx={{ minWidth: 100, fontFamily: 'poppins', fontSize: '16px'}}>
+      <FormControl size='medium' fullWidth>
+        <InputLabel id='demo-simple-select-label'>filter</InputLabel>
         <Select
           labelId='demo-simple-select-label'
           id='demo-simple-select'
@@ -27,10 +27,10 @@ const FilterSelect = ({ onFilter, filter, setFilter }) => {
           label='Filter'
           onChange={handleChange}
         >
-          <MenuItem value='all'>All</MenuItem>
-          <MenuItem value='active'>Active</MenuItem>
-          <MenuItem value='completed'>Done</MenuItem>
-          <MenuItem value='low'>Low priority</MenuItem>
+          <MenuItem value='all'>all</MenuItem>
+          <MenuItem value='active'>active</MenuItem>
+          <MenuItem value='completed'>done</MenuItem>
+          <MenuItem value='low'>priority: low</MenuItem>
           <MenuItem value='work'>Work</MenuItem>
 
           

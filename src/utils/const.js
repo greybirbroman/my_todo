@@ -1,12 +1,12 @@
 export const categories = [
     {
       id: 1,
-      class: 'bg-green-500',
+      class: 'bg-purple-500',
       name: 'Work',
     },
     {
       id: 2,
-      class: 'bg-orange-500',
+      class: 'bg-blue-500',
       name: 'Study',
     },
     {
@@ -16,7 +16,7 @@ export const categories = [
     },
     {
       id: 4,
-      class: 'bg-cyan-500',
+      class: 'bg-green-500',
       name: 'Shopping',
     },
   ];

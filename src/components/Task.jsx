@@ -5,7 +5,7 @@ import TaskSettings from './TaskSettings';
 
 const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
   const { description, title, id, category, priority } = task;
- 
+console.log(task); 
   function handleDelete() {
     onDelete(id)
   }
@@ -20,7 +20,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
   }
 
  function getTaskColorByPriority(priority) {
-    if(priority === 'medium') return 'bg-yellow-200'
+    if(priority === 'medium') return 'bg-[#FFF9DE]'
     if(priority === 'low') return 'bg-green-200'
     return 'bg-red-200'
   }
@@ -29,7 +29,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
     <li
       className={`w-full ${
         task.completed ? 'bg-gray-100 opacity-70' : getTaskColorByPriority(priority)
-      } rounded-xl py-2 px-3 space-y-3 border border-gray-600 shadow-lg`}
+      } rounded-xl py-2 px-3 space-y-3 shadow-md`}
     >
       <div
         className={`flex justify-between ${
@@ -50,13 +50,13 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
               <li key={tag.id} className='w-fit list-none py-1 px-1 font-light'>
               <div className='flex items-center gap-1'>
                   <div className={`w-5 h-5 rounded-full flex items-center justify-center ${tag.class}`}></div>
-                  <p className={`text-[14px] ${''}`}>{tag.name}</p>
+                  {/* <p className={`text-[14px] ${''}`}>{tag.name}</p> */}
               </div>
              </li>
             ))}
         </ul>
         <div 
-        className='flex items-center cursor-pointer'
+        className='flex items-center justify-between cursor-pointer'
         onClick={handleChangeStatus}
         >
           <span
@@ -64,7 +64,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
               task.completed ? 'text-gray-500' : 'text-gray-700'
             }`}
           >
-            Done
+            done
           </span>
           <CheckboxLabel checked={task.completed}></CheckboxLabel>
         </div>

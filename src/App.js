@@ -6,6 +6,9 @@ import AddTodoModal from './components/AddTodoModal';
 import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
 import FilterSelect from './components/FilterSelect';
+import TagsFilterBar from './components/TagsFilterBar';
+import SearchInput from './components/SearchInput';
+import SearchFilterField from './components/SearchFilterField';
 
 function App() {
   
@@ -43,7 +46,7 @@ function App() {
   }
 
   return (
-    <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-yellow-50'>
+    <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-white'>
       {isModalAddOpen && (
         <AddTodoModal
           onCancelClick={toggleAddModal}
@@ -73,7 +76,9 @@ function App() {
       {!isModalAddOpen && !isModalEditOpen && (
         <>
           <AddTaskBar onAddClick={toggleAddModal} />
-          <FilterSelect onFilter={handleFilterTasks} filter={filter} setFilter={setFilter}/>
+          {/* <FilterSelect onFilter={handleFilterTasks} filter={filter} setFilter={setFilter}/> */}
+          <SearchFilterField onFilter={handleFilterTasks} filter={filter} setFilter={setFilter}/>
+          <TagsFilterBar activeTags={activeTags} />
           <TasksList
             tasks={tasks}
             onDelete={deleteTask}

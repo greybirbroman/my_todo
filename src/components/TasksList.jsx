@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { categories } from "../utils/const";
+import { categories } from '../utils/const';
 import Task from './Task';
 import noTask from '../images/no-task.png';
 
@@ -12,25 +12,22 @@ export const TasksList = ({
   priority,
   filter,
 }) => {
-
   const filteredTasks = useMemo(() => {
     switch (filter) {
       case 'all':
         return tasks;
       case 'active':
         return tasks.filter((task) => !task.completed);
-      case 'work':
-        return tasks.filter((task) => task.category && task.category.name === 'Work');
       case 'completed':
         return tasks.filter((task) => task.completed);
       case 'low':
         return tasks.filter((task) => task.priority === 'low');
+      case 'work': // Делаем проверку на undefined чтобы избежать ошибки, если у задачи нет категории.
+        return tasks.filter((task) => task.category?.[0]?.name === 'Work');
       default:
         return tasks;
     }
   }, [tasks, filter]);
- 
-  
 
   const renderTasks = (tasks) => {
     if (tasks.length) {
@@ -56,7 +53,7 @@ export const TasksList = ({
   };
 
   return (
-    <ul className='grid grid-cols-2 sm:grid-cols-1 items-start justify-center gap-3 pt-20 sm:pt-10'>
+    <ul className='grid grid-cols-2 sm:grid-cols-1 items-start justify-center gap-3'>
       {renderTasks(filteredTasks)}
     </ul>
   );
