@@ -14,10 +14,6 @@ export const TasksList = ({
   searchQuery
 }) => {
   const filteredTasks = useMemo(() => {
-    
-    if (searchQuery) {
-      return tasks.filter(task => task.title.toLowerCase().includes(searchQuery.toLowerCase()));
-    }
 
     switch (filter) {
       case 'all':
@@ -33,7 +29,7 @@ export const TasksList = ({
       default:
         return tasks;
     }
-  }, [tasks, filter, searchQuery]);
+  }, [tasks, filter]);
 
   const renderTasks = (tasks) => {
     if (tasks.length) {

@@ -9,7 +9,6 @@ const CheckboxLabel = ({ checked = false, onClick }) => {
       onClick={onClick}
       checked={checked}
       control={<Checkbox />}
-      defaultChecked 
       color="success"
     />
   );
