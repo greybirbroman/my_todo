@@ -1,19 +1,18 @@
 import React, { useState } from 'react'
+import { debounce } from 'lodash'; 
 import useTasks from '../hooks/useTasks'
 import { useFormWithValidation } from '../hooks/useForm';
 
-const SearchInput = ({onSearch, searchText, setSearchText}) => {
+const SearchInput = ({onSearch, searchQuery, setSearchQuery}) => {
     
     const [searchResults, setSearchResults] = useState(null);
     const [searchTimeout, setSearchTimeout] = useState(null);
     const { tasks } = useTasks()
     const { values, setValues } = useFormWithValidation()
 
-    const handleSearchChange = (e) => {
+    const handleSearchChange = debounce((searchQuery) => {
 
-      const { value } = e.target.value
-      setSearchText(value)
-      onSearch(value)
+      setSearchQuery(searchQuery)
         // clearTimeout(searchTimeout);
         // setValues({
         //   search: e.target.value
@@ -29,7 +28,7 @@ const SearchInput = ({onSearch, searchText, setSearchText}) => {
         //     setSearchResults(searchResults);
         //   }, 500) // оттягиваем запрос на поиск если пользователь решит добавить к запросу что-то еще
         // );
-      };
+      }, 300);
 
   return (
     <input
@@ -37,7 +36,7 @@ const SearchInput = ({onSearch, searchText, setSearchText}) => {
         type='text'
         id='search'
         name='search'
-        value={searchText}
+        value={searchQuery}
         placeholder={'task...'}
         onChange={handleSearchChange}
         required

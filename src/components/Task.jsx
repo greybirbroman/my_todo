@@ -4,8 +4,7 @@ import { useFormWithValidation } from '../hooks/useForm';
 import TaskSettings from './TaskSettings';
 
 const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
-  const { description, title, id, category, priority } = task;
-console.log(task); 
+  const { description, title, id, category, priority } = task; 
   function handleDelete() {
     onDelete(id)
   }

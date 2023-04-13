@@ -19,7 +19,9 @@ function App() {
   const [activeTags, setActiveTags] = useState('');
   const [priority, setPriority] = useState('')
   const [filter, setFilter] = useState('all')
-  const [searchText, setSearchText] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  console.log(searchQuery);
+  
   
   const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } =
     useTasks();
@@ -46,8 +48,8 @@ function App() {
     setFilter(filter)
   }
 
-  function handleSearchTasks(value) {
-    setFilter(value)
+  function handleSearchTasks(searchQuery) {
+    setSearchQuery(searchQuery)
   }
 
   return (
@@ -87,8 +89,8 @@ function App() {
           filter={filter} 
           setFilter={setFilter} 
           onSearch={handleSearchTasks}
-          searchText={searchText}
-          setSearchText={setSearchText}
+          searchText={searchQuery}
+          setSearchText={setSearchQuery}
           />
           <TagsFilterBar activeTags={activeTags} />
           <TasksList
@@ -100,7 +102,7 @@ function App() {
             selectedTags={selectedTags}
             priority={priority}
             filter={filter}
-            searchText={searchText}
+            searchText={searchQuery}
           />
         </>
       )}
