@@ -13,7 +13,8 @@ function App() {
   const [isModalAddOpen, setIsModaAddOpen] = useState(false); // Стейт для Модальных окон.
   const [isModalEditOpen, setIsModaEditOpen] = useState(false); // Стейт для Модальных окон.
   const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
-  const [selectedTags, setSelectedTags] = useState([]); // Стейт хранения выбранных категорий 
+  const [selectedTags, setSelectedTags] = useState([]); // Стейт хранения выбранных категорий для AddModal и EditModal.
+  const [selectedFilterTags, setSelectedFilterTags] = useState([]); // Стейт для хранения категорий в TagsFilterBar.
   const [activeTags, setActiveTags] = useState(''); 
   const [priority, setPriority] = useState('');
   const [filter, setFilter] = useState('all');
@@ -68,6 +69,9 @@ function App() {
     setSearchQuery(searchQuery);
   }
 
+  function handleTagFilter(tags) {
+    setSelectedFilterTags(tags)
+  }
 
   return (
     <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-white'>
@@ -108,7 +112,7 @@ function App() {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
-          <TagsFilterBar selectedTags={selectedTags} onTagFilter={() => {}}/>
+          <TagsFilterBar selectedFilterTags={selectedFilterTags} onTagFilter={handleTagFilter}/>
           <TasksList
             tasks={searchQuery !== '' ? searchTasks : tasks} // Если поисковая строка не пустая
             onDelete={deleteTask}                            // отдаем на рендер массив найденых задач.
@@ -119,6 +123,7 @@ function App() {
             priority={priority}
             filter={filter}
             searchText={searchQuery}
+            selectedFilterTags={selectedFilterTags}
           />
         </>
       )}

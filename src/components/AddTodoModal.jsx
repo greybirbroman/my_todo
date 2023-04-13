@@ -25,6 +25,7 @@ const AddTodoModal = ({
       completed: false,
       category: selectedTags,
       priority: priority,
+      createdAt: new Date()
     };
     onAddClick(newTask);
     resetForm();

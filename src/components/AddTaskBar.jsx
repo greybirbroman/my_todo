@@ -10,8 +10,8 @@ const AddTaskBar = ({ onAddClick, allTasks, doneTasks }) => {
       <span className='rounded-xl px-2 py-2'>{doneTasks}/{allTasks} complete</span>
       <Button
         sx={{ fontFamily: 'poppins', border: '1px solid gray' }}
-        variant='elevated'
-        color='primary'
+        variant='outlined'
+        color='success'
         size='small'
         disabled={false}
         endIcon={<SendIcon />}

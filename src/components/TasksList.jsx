@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 import Task from './Task';
 import noTask from '../images/no-task.png';
+import useTasks from '../hooks/useTasks';
 
 export const TasksList = ({
   tasks,
@@ -10,23 +11,38 @@ export const TasksList = ({
   setSelectedTask,
   priority,
   filter,
+  selectedFilterTags
 }) => {
+
   const filteredTasks = useMemo(() => {
+    let filtered = tasks
+
+    if(selectedFilterTags.length) {
+      filtered = filtered.filter(task => {
+        const taskTags = task.category?.map(tag => tag.name) || [];
+        return selectedFilterTags.some(tag => taskTags.includes(tag));
+      });
+    }
+
     switch (filter) {
       case 'all':
-        return tasks;
+        return filtered;
       case 'active':
-        return tasks.filter((task) => !task.completed);
+        return filtered.filter((task) => !task.completed);
       case 'completed':
-        return tasks.filter((task) => task.completed);
+        return filtered.filter((task) => task.completed);
       case 'low':
-        return tasks.filter((task) => task.priority === 'low');
-      case 'work': // Делаем проверку на undefined чтобы избежать ошибки, если у задачи нет категории.
-        return tasks.filter((task) => task.category?.[0]?.name === 'Work');
+        return filtered.filter((task) => task.priority === 'low');
+        case 'medium':
+        return filtered.filter((task) => task.priority === 'medium');
+        case 'high':
+        return filtered.filter((task) => task.priority === 'high');
+      // case 'work': // Делаем проверку на undefined чтобы избежать ошибки, если у задачи нет категории.
+      //   return filtered.filter((task) => task.category?.[0]?.name === 'Work');
       default:
-        return tasks;
+        return filtered;
     }
-  }, [tasks, filter]);
+  }, [tasks, filter, selectedFilterTags]);
 
   const renderTasks = (tasks) => {
     if (tasks.length) {
@@ -34,6 +50,7 @@ export const TasksList = ({
         <Task
           key={task.id}
           task={task}
+          completed={task.completed}
           onEdit={onEdit}
           onDelete={onDelete}
           onToggleStatus={onToggleTaskStatus}

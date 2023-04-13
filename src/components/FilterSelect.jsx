@@ -31,7 +31,8 @@ const FilterSelect = ({ onFilter, filter, setFilter }) => {
           <MenuItem value='active'>active</MenuItem>
           <MenuItem value='completed'>done</MenuItem>
           <MenuItem value='low'>priority: low</MenuItem>
-          <MenuItem value='work'>Work</MenuItem>
+          <MenuItem value='medium'>priority: medium</MenuItem>
+          <MenuItem value='high'>priority: high</MenuItem>
 
           
         </Select>
