@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { categories } from '../utils/const';
 import Task from './Task';
 import noTask from '../images/no-task.png';
 
@@ -11,10 +10,8 @@ export const TasksList = ({
   setSelectedTask,
   priority,
   filter,
-  searchQuery
 }) => {
   const filteredTasks = useMemo(() => {
-
     switch (filter) {
       case 'all':
         return tasks;
@@ -55,9 +52,11 @@ export const TasksList = ({
   };
 
   return (
-    <ul className='grid grid-cols-2 sm:grid-cols-1 items-start justify-center gap-3'>
-      {renderTasks(filteredTasks)}
-    </ul>
+    <>
+      <ul className='grid grid-cols-2 sm:grid-cols-1 items-start justify-center gap-3'>
+        {renderTasks(filteredTasks)}
+      </ul>
+    </>
   );
 };
 

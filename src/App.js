@@ -68,10 +68,6 @@ function App() {
     setSearchQuery(searchQuery);
   }
 
-  function handleFilterTags(filter, selectedTags) {
-    setFilter(filter);
-    setSelectedTags(selectedTags);
-  }
 
   return (
     <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-white'>
@@ -112,7 +108,7 @@ function App() {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
-          <TagsFilterBar selectedTags={selectedTags} onTagFilter={handleFilterTags}/>
+          <TagsFilterBar selectedTags={selectedTags} onTagFilter={() => {}}/>
           <TasksList
             tasks={searchQuery !== '' ? searchTasks : tasks} // Если поисковая строка не пустая
             onDelete={deleteTask}                            // отдаем на рендер массив найденых задач.
