@@ -19,6 +19,7 @@ function App() {
   const [activeTags, setActiveTags] = useState('');
   const [priority, setPriority] = useState('')
   const [filter, setFilter] = useState('all')
+  const [searchText, setSearchText] = useState('');
   
   const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } =
     useTasks();
@@ -43,6 +44,10 @@ function App() {
 
   function handleFilterTasks(filter) {
     setFilter(filter)
+  }
+
+  function handleSearchTasks(value) {
+    setFilter(value)
   }
 
   return (
@@ -77,7 +82,14 @@ function App() {
         <>
           <AddTaskBar onAddClick={toggleAddModal} />
           {/* <FilterSelect onFilter={handleFilterTasks} filter={filter} setFilter={setFilter}/> */}
-          <SearchFilterField onFilter={handleFilterTasks} filter={filter} setFilter={setFilter}/>
+          <SearchFilterField 
+          onFilter={handleFilterTasks} 
+          filter={filter} 
+          setFilter={setFilter} 
+          onSearch={handleSearchTasks}
+          searchText={searchText}
+          setSearchText={setSearchText}
+          />
           <TagsFilterBar activeTags={activeTags} />
           <TasksList
             tasks={tasks}
@@ -88,6 +100,7 @@ function App() {
             selectedTags={selectedTags}
             priority={priority}
             filter={filter}
+            searchText={searchText}
           />
         </>
       )}

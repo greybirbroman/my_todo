@@ -11,23 +11,26 @@ export const TasksList = ({
   setSelectedTask,
   priority,
   filter,
+  searchText
 }) => {
   const filteredTasks = useMemo(() => {
+
+    const filteredBySearch = tasks.filter(task => task.name.toLowerCase().includes(searchText.toLowerCase()));
     switch (filter) {
       case 'all':
-        return tasks;
+        return filteredBySearch;
       case 'active':
-        return tasks.filter((task) => !task.completed);
+        return filteredBySearch.filter((task) => !task.completed);
       case 'completed':
-        return tasks.filter((task) => task.completed);
+        return filteredBySearch.filter((task) => task.completed);
       case 'low':
-        return tasks.filter((task) => task.priority === 'low');
+        return filteredBySearch.filter((task) => task.priority === 'low');
       case 'work': // Делаем проверку на undefined чтобы избежать ошибки, если у задачи нет категории.
-        return tasks.filter((task) => task.category?.[0]?.name === 'Work');
+        return filteredBySearch.filter((task) => task.category?.[0]?.name === 'Work');
       default:
         return tasks;
     }
-  }, [tasks, filter]);
+  }, [tasks, filter, searchText]);
 
   const renderTasks = (tasks) => {
     if (tasks.length) {
