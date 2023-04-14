@@ -3,11 +3,11 @@ import { v4 as uuidv4 } from 'uuid';
 import { useFormWithValidation } from '../hooks/useForm';
 import TagsBar from './TagsBar';
 import PriorityBar from './PriorityBar';
-import { motion as m, AnimatePresence } from 'framer-motion';
+import { AnimatePresence, motion as m } from 'framer-motion';
 
 const AddTodoModal = ({
+  closeAddModal,
   isModalAddOpen,
-  setIsModalAddOpen,
   onAddClick,
   selectedTags,
   setSelectedTags,
@@ -17,6 +17,13 @@ const AddTodoModal = ({
   setPriority,
 }) => {
   const { values, handleChange, resetForm, isValid } = useFormWithValidation();
+  
+  useEffect(() => {
+    setSelectedTags([]);
+    setActiveTags([]);
+    setPriority('low');
+  }, [isModalAddOpen]);
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -32,34 +39,21 @@ const AddTodoModal = ({
     onAddClick(newTask);
     resetForm();
   }
-
-  function handleCloseModal() {
-    setIsModalAddOpen(false);
-  }
-
   // При открытии попапа обнуляем состояние Tags.
-  useEffect(() => {
-    setSelectedTags([]);
-    setActiveTags([]);
-    setPriority('low');
-  }, []);
 
   return (
     <>
       <AnimatePresence>
+        {isModalAddOpen && (
         <div className={`fixed z-50 inset-0 flex justify-center items-center`}>
           <div
             className='bg-black bg-opacity-50 absolute inset-0 backdrop-blur-[3px]'
-            onClick={handleCloseModal}
+            onClick={closeAddModal}
           ></div>
           <m.div
             initial={{ opacity: 0, y: -150 }}
             animate={{ opacity: 1, y: 0 }}
-            exit={{
-              opacity: 0,
-              y: -150,
-              transition: { type: 'spring', stiffness: 300, damping: 30 },
-            }}
+            exit={{ opacity: 0, y: -150 }}
             transition={{ duration: 0.3 }}
             className='relative bg-slate-100 w-[500px] h-fit p-10 rounded-2xl shadow-xl'
           >
@@ -69,7 +63,7 @@ const AddTodoModal = ({
                 <button
                   className='font-semibold'
                   type='button'
-                  onClick={handleCloseModal}
+                  onClick={closeAddModal}
                 >
                   Cancel
                 </button>
@@ -121,6 +115,7 @@ const AddTodoModal = ({
             </form>
           </m.div>
         </div>
+      )}
       </AnimatePresence>
     </>
   );

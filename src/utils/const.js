@@ -31,3 +31,9 @@ export const categories = [
   const month = String(now.getMonth() + 1).padStart(2, '0');
   const day = String(now.getDate()).padStart(2, '0');
   export const createdAt = `${year}-${month}-${day}`;
+
+  export const buttonVariants = {
+    rest: { scale: 1 },
+    hover: { scale: 1.1 },
+    tap: { scale: 0.9 },
+  };

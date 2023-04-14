@@ -7,7 +7,6 @@ import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
 import TagsFilterBar from './components/TagsFilterBar';
 import SearchFilterField from './components/SearchFilterField';
-import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } =
@@ -17,7 +16,7 @@ function App() {
   const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
   const [selectedTags, setSelectedTags] = useState([]); // Стейт хранения выбранных категорий для AddModal и EditModal.
   const [selectedFilterTags, setSelectedFilterTags] = useState([]); // Стейт для хранения категорий в TagsFilterBar.
-  const [activeTags, setActiveTags] = useState('');
+  const [activeTags, setActiveTags] = useState([]);
   const [priority, setPriority] = useState('');
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
@@ -61,8 +60,9 @@ function App() {
   };
 
   function toggleAddModal() {
-    setIsModalAddOpen(!isModalAddOpen);
+    setIsModalAddOpen(!isModalAddOpen)
   }
+
 
   function toggleEditModal() {
     setIsModalEditOpen(!isModalEditOpen);
@@ -82,11 +82,10 @@ function App() {
 
   return (
     <div className='text-gray-700 py-5 px-10 md:px-5 sm:px-2 flex mx-auto flex-col max-w-[1280px] min-w-[400px] space-y-3 bg-white min-h-[100vh]'>
-      {isModalAddOpen && (
+
         <AddTodoModal
-          isModalAddOpen={toggleAddModal}
-          setIsModalAddOpen={toggleAddModal}
-          onCancelClick={toggleAddModal}
+          isModalAddOpen={isModalAddOpen}
+          closeAddModal={toggleAddModal}
           onAddClick={addNewTask}
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
@@ -95,7 +94,7 @@ function App() {
           priority={priority}
           setPriority={setPriority}
         />
-        )}
+   
       {isModalEditOpen && (
         <EditTodoModal
           isModalEditOpen={toggleEditModal}

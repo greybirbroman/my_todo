@@ -1,6 +1,7 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import Task from './Task';
 import noTask from '../images/no-task.png';
+import {motion as m } from 'framer-motion';
 
 
 export const TasksList = ({
@@ -14,6 +15,8 @@ export const TasksList = ({
   selectedFilterTags
 }) => {
 
+  const [updatedTasks, setUpdatedTasks] = useState(tasks);
+  
 
   const filteredTasks = useMemo(() => {
     let filtered = tasks
@@ -24,7 +27,6 @@ export const TasksList = ({
         return selectedFilterTags.some(tag => taskTags.includes(tag));
       });
     }
-
     switch (filter) {
       case 'all':
         return filtered;
@@ -38,15 +40,13 @@ export const TasksList = ({
         return filtered.filter((task) => task.priority === 'medium');
         case 'high':
         return filtered.filter((task) => task.priority === 'high');
-      // case 'work': // Делаем проверку на undefined чтобы избежать ошибки, если у задачи нет категории.
-      //   return filtered.filter((task) => task.category?.[0]?.name === 'Work');
       default:
         return filtered;
     }
   }, [tasks, filter, selectedFilterTags]);
 
   const handleToggleTaskStatus = (id) => {
-    const updatedTasks = filteredTasks.map(task => {
+    const updatedTasksLocal = filteredTasks.map(task => {
       if (task.id === id) {
         return {
           ...task,
@@ -62,9 +62,29 @@ export const TasksList = ({
       }
       return task;
     });
-    localStorage.setItem('tasks', tasks)
+    setUpdatedTasks(updatedTasksLocal);
+    localStorage.setItem("tasks", JSON.stringify(updatedTasksLocal));
   }
 
+  const handleDragEnd = (result) => {
+    const { destination, source } = result;
+
+    // Если пользователь отпустил элемент за пределами списка задач, то ничего не делаем.
+    if (!destination) {
+      return;
+    }
+    // Копируем массив задач для его изменения.
+    const updatedTasks = [...filteredTasks];
+    console.log(updatedTasks)
+
+    // Удаляем задачу из старой позиции и вставляем ее в новую позицию.
+    const [removedTask] = updatedTasks.splice(source.index, 1);
+    updatedTasks.splice(destination.index, 0, removedTask);
+
+    // Обновляем состояние задач и сохраняем его в localStorage.
+    setUpdatedTasks(updatedTasks);
+    localStorage.setItem('tasks', JSON.stringify(updatedTasks));
+  }
   const renderImage = () => {
     return (
       <div className='w-full h-full flex items-center justify-center'>
@@ -76,6 +96,13 @@ export const TasksList = ({
   const renderTasks = (filteredTasks) => {
     if (filteredTasks.length) {
       return filteredTasks.map((task) => (
+        <m.div
+        key={task.id}
+        drag
+        dragConstraints={{top: 0, bottom: 0, left: 0, right: 0}}
+        dragElastic={0.5}
+        onDragEnd={handleDragEnd}
+        >
         <Task
           key={task.id}
           task={task}
@@ -86,6 +113,7 @@ export const TasksList = ({
           selectedTags={task.category}
           priority={priority}
         />
+        </m.div>
       ));
     }
   };
