@@ -7,12 +7,13 @@ import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
 import TagsFilterBar from './components/TagsFilterBar';
 import SearchFilterField from './components/SearchFilterField';
+import { AnimatePresence } from 'framer-motion';
 
 function App() {
   const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } =
     useTasks();
-  const [isModalAddOpen, setIsModaAddOpen] = useState(false); // Стейт для Модальных окон.
-  const [isModalEditOpen, setIsModaEditOpen] = useState(false); // Стейт для Модальных окон.
+  const [isModalAddOpen, setIsModalAddOpen] = useState(false); // Стейт для Модальных окон.
+  const [isModalEditOpen, setIsModalEditOpen] = useState(false); // Стейт для Модальных окон.
   const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
   const [selectedTags, setSelectedTags] = useState([]); // Стейт хранения выбранных категорий для AddModal и EditModal.
   const [selectedFilterTags, setSelectedFilterTags] = useState([]); // Стейт для хранения категорий в TagsFilterBar.
@@ -60,11 +61,11 @@ function App() {
   };
 
   function toggleAddModal() {
-    setIsModaAddOpen(!isModalAddOpen);
+    setIsModalAddOpen(!isModalAddOpen);
   }
 
   function toggleEditModal() {
-    setIsModaEditOpen(!isModalEditOpen);
+    setIsModalEditOpen(!isModalEditOpen);
   }
 
   function handleFilterTasks(filter) {
@@ -81,9 +82,10 @@ function App() {
 
   return (
     <div className='text-gray-700 py-5 px-10 md:px-5 sm:px-2 flex mx-auto flex-col max-w-[1280px] min-w-[400px] space-y-3 bg-white min-h-[100vh]'>
-      {isModalAddOpen && 
+      {isModalAddOpen && (
         <AddTodoModal
           isModalAddOpen={toggleAddModal}
+          setIsModalAddOpen={toggleAddModal}
           onCancelClick={toggleAddModal}
           onAddClick={addNewTask}
           selectedTags={selectedTags}
@@ -93,7 +95,7 @@ function App() {
           priority={priority}
           setPriority={setPriority}
         />
-      }
+        )}
       {isModalEditOpen && (
         <EditTodoModal
           isModalEditOpen={toggleEditModal}
