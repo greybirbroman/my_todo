@@ -3,8 +3,7 @@ import CheckboxLabel from './CheckboxLabel';
 import TaskSettings from './TaskSettings';
 
 const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
-  const { description, title, id, category, priority, createdAt } =
-    task;
+  const { description, title, id, category, priority, completed, createdAt } = task;
 
   const options = {
     day: 'numeric',
@@ -13,9 +12,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
     minute: 'numeric',
     hour12: false,
   };
-  const formattedDate = new Intl.DateTimeFormat('en-US', options).format(
-    createdAt
-  );
+  const formattedDate = new Intl.DateTimeFormat('en-US', options).format(new Date(createdAt));
 
   function handleDelete() {
     onDelete(id);
@@ -39,11 +36,11 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
   return (
     <li
       className={`w-full ${
-        task.completed ? 'bg-gray-100 opacity-70' : getTaskColorByPriority(priority)
+        completed ? 'bg-slate-200 opacity-70' : getTaskColorByPriority(priority)
       } rounded-xl py-2 px-3 space-y-3 shadow-md`}
     >
       <div
-        className={`flex justify-between ${task.completed ? 'line-through' : ''}`}
+        className={`flex justify-between ${completed ? 'line-through' : ''}`}
       >
         <h2 className='font-semibold text-xl'>{title}</h2>
         <TaskSettings onEdit={handleEditClick} onDelete={handleDelete} />
@@ -51,7 +48,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
       <div>
         <p
           className={`flex flex-wrap text-sm ${
-            task.completed ? 'line-through' : ''
+            completed ? 'line-through' : ''
           }`}
         >
           {description}
@@ -59,7 +56,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
       </div>
       <div className='flex justify-between items-center'>
         <ul className='w-fit flex items-center gap-2'>
-          <span className='text-[12px] pr-1'>#tags:</span>
+         {task.category.length !== 0 &&  <span className='text-[12px] pr-1'>#tags:</span>}
           {category.map((tag) => (
             <li key={tag.id} className='w-fit list-none font-light'>
               <div className='flex items-center text-[12px] font-normal'>
@@ -80,12 +77,12 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
         >
           <span
             className={`text-[12px] ${
-              task.completed ? 'text-gray-500' : 'text-gray-700'
+              completed ? 'text-gray-500' : 'text-gray-700'
             }`}
           >
             done
           </span>
-          <CheckboxLabel checked={task.completed}></CheckboxLabel>
+          <CheckboxLabel checked={completed}></CheckboxLabel>
         </div>
       </div>
     </li>

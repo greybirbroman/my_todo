@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import Task from './Task';
 import noTask from '../images/no-task.png';
-import useTasks from '../hooks/useTasks';
+
 
 export const TasksList = ({
   tasks,
@@ -13,6 +13,7 @@ export const TasksList = ({
   filter,
   selectedFilterTags
 }) => {
+
 
   const filteredTasks = useMemo(() => {
     let filtered = tasks
@@ -44,36 +45,58 @@ export const TasksList = ({
     }
   }, [tasks, filter, selectedFilterTags]);
 
-  const renderTasks = (tasks) => {
-    if (tasks.length) {
-      return tasks.map((task) => (
+  const handleToggleTaskStatus = (id) => {
+    const updatedTasks = filteredTasks.map(task => {
+      if (task.id === id) {
+        return {
+          ...task,
+          completed: !task.completed
+        }
+      }
+      return task;
+    });
+    onToggleTaskStatus(id);
+    tasks.map((task, index) => {
+      if (task.id === id) {
+        tasks[index].completed = !task.completed
+      }
+      return task;
+    });
+    localStorage.setItem('tasks', tasks)
+  }
+
+  const renderImage = () => {
+    return (
+      <div className='w-full h-full flex items-center justify-center'>
+        <img src={noTask} alt='no_tasks' className='object-cover' />
+      </div>
+    );
+  }
+
+  const renderTasks = (filteredTasks) => {
+    if (filteredTasks.length) {
+      return filteredTasks.map((task) => (
         <Task
           key={task.id}
           task={task}
-          completed={task.completed}
           onEdit={onEdit}
           onDelete={onDelete}
-          onToggleStatus={onToggleTaskStatus}
+          onToggleStatus={handleToggleTaskStatus}
           setSelectedTask={setSelectedTask}
           selectedTags={task.category}
           priority={priority}
         />
       ));
     }
-
-    return (
-      <div className='w-full h-full flex items-center justify-center'>
-        <img src={noTask} alt='no_tasks' className='object-cover pt-20' />
-      </div>
-    );
   };
 
   return (
     <>
-      <ul className='grid grid-cols-2 sm:grid-cols-1 items-start justify-center gap-3'>
+    {!filteredTasks.length && renderImage()}
+      <ul className='w-full h-fit grid md:grid-cols-2 lg:grid-cols-2 gap-3 lg:gap-4'>
         {renderTasks(filteredTasks)}
       </ul>
-    </>
+      </>
   );
 };
 

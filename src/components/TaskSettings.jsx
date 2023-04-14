@@ -5,11 +5,15 @@ import MenuItem from '@mui/material/MenuItem';
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 
 const TaskSettings = ({ onEdit, onDelete }) => {
+
   const [anchorEl, setAnchorEl] = useState(null);
+
   const open = Boolean(anchorEl);
+
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = () => {
     setAnchorEl(null);
   };
@@ -45,7 +49,7 @@ const TaskSettings = ({ onEdit, onDelete }) => {
           horizontal: 'left',
         }}
       >
-        <MenuItem onClick={onEdit}>Edit</MenuItem>
+        <MenuItem onClick={() => {onEdit(); handleClose();}}>Edit</MenuItem>
         <MenuItem onClick={onDelete}>Delete</MenuItem>
       </Menu>
     </div>

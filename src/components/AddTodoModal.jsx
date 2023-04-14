@@ -5,6 +5,7 @@ import TagsBar from './TagsBar';
 import PriorityBar from './PriorityBar';
 
 const AddTodoModal = ({
+  isModalAddOpen,
   onCancelClick,
   onAddClick,
   selectedTags,
@@ -15,6 +16,7 @@ const AddTodoModal = ({
   setPriority,
 }) => {
   const { values, handleChange, resetForm, isValid } = useFormWithValidation();
+
 
   function handleSubmit(e) {
     e.preventDefault();
@@ -39,7 +41,10 @@ const AddTodoModal = ({
   }, []);
 
   return (
-    <div className='w-full mx-auto my-auto py-10 px-10 bg-yellow-100 rounded-2xl'>
+    <>
+    <div className={`fixed z-50 inset-0 flex justify-center items-center`}>
+      <div className='bg-black bg-opacity-50 absolute inset-0 backdrop-blur-[3px]' onClick={isModalAddOpen}></div>
+      <div className='relative bg-slate-100 w-[500px] h-fit p-10 rounded-2xl shadow-xl'>
       <form className='flex flex-col' onSubmit={handleSubmit}>
         {/* { buttonsArea } */}
         <div className='flex justify-between pb-10'>
@@ -52,8 +57,10 @@ const AddTodoModal = ({
           </button>
           <button
             className={`${
-              !isValid ? 'text-gray-500 border-gray-500' : 'text-gray-700 bg-green-200'
-            } py-2 px-2 rounded-xl font-semibold border border-gray-600`}
+              !isValid
+                ? 'text-gray-300 border-gray-300'
+                : 'text-gray-700 border-[#6469ff]'
+            } py-2 px-2 rounded-xl font-semibold border`}
             type='button'
             onClick={handleSubmit}
             disabled={!isValid}
@@ -62,9 +69,9 @@ const AddTodoModal = ({
           </button>
           {/* { inputsArea } */}
         </div>
-        <label className='text-[14px]'>Title</label>
+        <label className='text-[14px] mb-2'>Title</label>
         <input
-          className='mt-2 mb-2 py-1 px-2 placeholder:pl-3 placeholder:text-[14px] placeholder:font-light font-semibold outline-none rounded-lg'
+          className='w-full border border-gray-600 text-gray-900 text-sm rounded-md focus:ring-[#4649ff] focus:border-[#4649ff] focus:border outline-none p-3'
           onChange={handleChange}
           type='text'
           name='title'
@@ -73,9 +80,9 @@ const AddTodoModal = ({
           minLength={2}
           required
         ></input>
-        <label className='text-[14px]'>Description</label>
+        <label className='text-[14px] mb-2'>Description</label>
         <textarea
-          className='mt-2 py-1 px-2 placeholder:pl-3 placeholder:text-[14px] font-light outline-none rounded-lg'
+          className='w-full border border-gray-600 text-gray-900 text-sm rounded-md focus:ring-[#4649ff] focus:border-[#4649ff] focus:border outline-none p-3'
           onChange={handleChange}
           type='text'
           name='description'
@@ -94,7 +101,10 @@ const AddTodoModal = ({
           <PriorityBar priority={priority} setPriority={setPriority} />
         </div>
       </form>
+      </div>
     </div>
+    </>
+          
   );
 };
 

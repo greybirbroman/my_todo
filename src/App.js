@@ -9,31 +9,37 @@ import TagsFilterBar from './components/TagsFilterBar';
 import SearchFilterField from './components/SearchFilterField';
 
 function App() {
-  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } = useTasks();
+  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } =
+    useTasks();
   const [isModalAddOpen, setIsModaAddOpen] = useState(false); // Стейт для Модальных окон.
   const [isModalEditOpen, setIsModaEditOpen] = useState(false); // Стейт для Модальных окон.
   const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
   const [selectedTags, setSelectedTags] = useState([]); // Стейт хранения выбранных категорий для AddModal и EditModal.
   const [selectedFilterTags, setSelectedFilterTags] = useState([]); // Стейт для хранения категорий в TagsFilterBar.
-  const [activeTags, setActiveTags] = useState(''); 
+  const [activeTags, setActiveTags] = useState('');
   const [priority, setPriority] = useState('');
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchTasks, setSearchTasks] = useState(tasks);
-  const allTasks = tasks.length
-  const doneTasks = tasks.filter(task => task.completed).length
+  const allTasks = tasks.length;
+  const doneTasks = tasks.filter((task) => task.completed).length;
+  // const searchTasks = tasks.filter(
+  //   (task) =>
+  //     task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+  //     task.description.toLowerCase().includes(searchQuery.toLowerCase())
+  // );
 
-// Этот эффект использует функцию setTimeout,
-// чтобы задержать обновление результатов поиска на 500 миллисекунд
-// после изменения searchQuery. Кроме того,
-// эффект очищает таймаут, если компонент размонтируется
-// или если searchQuery изменяется раньше, чем 500 миллисекунд. 
+  // Этот эффект использует функцию setTimeout,
+  // чтобы задержать обновление результатов поиска на 500 миллисекунд
+  // после изменения searchQuery. Кроме того,
+  // эффект очищает таймаут, если компонент размонтируется
+  // или если searchQuery изменяется раньше, чем 500 миллисекунд.
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       const filteredTasks = tasks.filter(
         (task) =>
-          task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          task.description.toLowerCase().includes(searchQuery.toLowerCase())
+          task?.title?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          task?.description?.toLowerCase().includes(searchQuery.toLowerCase())
       );
       setSearchTasks(filteredTasks);
     }, 500);
@@ -70,13 +76,14 @@ function App() {
   }
 
   function handleTagFilter(tags) {
-    setSelectedFilterTags(tags)
+    setSelectedFilterTags(tags);
   }
 
   return (
-    <div className='text-gray-700 py-5 px-10 mx-auto flex flex-col max-w-[992px] min-w-[400px] space-y-3 bg-white'>
-      {isModalAddOpen && (
+    <div className='text-gray-700 py-5 px-10 md:px-5 sm:px-2 flex mx-auto flex-col max-w-[1280px] min-w-[400px] space-y-3 bg-white min-h-[100vh]'>
+      {isModalAddOpen && 
         <AddTodoModal
+          isModalAddOpen={toggleAddModal}
           onCancelClick={toggleAddModal}
           onAddClick={addNewTask}
           selectedTags={selectedTags}
@@ -86,10 +93,10 @@ function App() {
           priority={priority}
           setPriority={setPriority}
         />
-      )}
-
+      }
       {isModalEditOpen && (
         <EditTodoModal
+          isModalEditOpen={toggleEditModal}
           onCancelClick={toggleEditModal}
           onEdit={editTask}
           selectedTask={selectedTask}
@@ -99,11 +106,15 @@ function App() {
           setActiveTags={setActiveTags}
           priority={priority}
           setPriority={setPriority}
+        
         />
       )}
-      {!isModalAddOpen && !isModalEditOpen && (
         <>
-          <AddTaskBar onAddClick={toggleAddModal} allTasks={allTasks} doneTasks={doneTasks} />
+          <AddTaskBar
+            onAddClick={toggleAddModal}
+            allTasks={allTasks}
+            doneTasks={doneTasks}
+          />
           <SearchFilterField
             onFilter={handleFilterTasks}
             filter={filter}
@@ -112,10 +123,14 @@ function App() {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
-          <TagsFilterBar selectedFilterTags={selectedFilterTags} onTagFilter={handleTagFilter}/>
+          <div className='flex gap-4 md:flex-col sm:flex-col justify-between w-full'>
+          <TagsFilterBar
+            selectedFilterTags={selectedFilterTags}
+            onTagFilter={handleTagFilter}
+          />
           <TasksList
             tasks={searchQuery !== '' ? searchTasks : tasks} // Если поисковая строка не пустая
-            onDelete={deleteTask}                            // отдаем на рендер массив найденых задач.
+            onDelete={deleteTask} // отдаем на рендер массив найденых задач.
             onToggleTaskStatus={toggleTaskStatus}
             onEdit={toggleEditModal}
             setSelectedTask={setSelectedTask}
@@ -125,8 +140,8 @@ function App() {
             searchText={searchQuery}
             selectedFilterTags={selectedFilterTags}
           />
+          </div>
         </>
-      )}
     </div>
   );
 }

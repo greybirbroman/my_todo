@@ -19,4 +19,15 @@ export const categories = [
       class: 'bg-green-400',
       name: 'Shopping',
     },
+    {
+      id: 5,
+      class: 'bg-yellow-400',
+      name: 'Family',
+    },
   ];
+
+  const now = new Date();
+  const year = now.getFullYear();
+  const month = String(now.getMonth() + 1).padStart(2, '0');
+  const day = String(now.getDate()).padStart(2, '0');
+  export const createdAt = `${year}-${month}-${day}`;

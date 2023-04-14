@@ -26,10 +26,10 @@ const TagsBar = ({
       {categories.map((category) => (
         <li
           key={category.id}
-          className={`flex py-2 px-2 gap-2 w-fit items-center rounded-full border border-gray-600 cursor-pointer ${
+          className={`flex py-2 px-2 gap-2 w-fit items-center shadow-md rounded-full cursor-pointer ${
             activeTags && activeTags.includes(category.id)
               ? 'bg-yellow-200'
-              : ''
+              : 'bg-white'
           }`}
           onClick={() => handleClick(category)}
         >

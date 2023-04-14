@@ -21,6 +21,7 @@ const FilterSelect = ({ onFilter, filter, setFilter }) => {
       <FormControl size='medium' fullWidth>
         <InputLabel id='demo-simple-select-label'>filter</InputLabel>
         <Select
+          
           labelId='demo-simple-select-label'
           id='demo-simple-select'
           value={filter}
