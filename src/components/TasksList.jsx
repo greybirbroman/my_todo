@@ -66,11 +66,13 @@ export const TasksList = ({
   };
 
   const renderImage = () => {
-    return (
-      <div className='w-full h-full flex items-center justify-center pt-10'>
-        <img src={noTask} alt='no_tasks' className='object-cover justify-center' />
-      </div>
-    );
+    if(!filteredTasks.length) {
+      return (
+        <div className='w-full h-full flex items-center justify-center pt-10'>
+          <img src={noTask} alt='no_tasks' className='object-cover justify-center' />
+        </div>
+      );
+    }
   };
 
   const renderTasks = (filteredTasks) => {
@@ -101,7 +103,6 @@ export const TasksList = ({
         );
       });
     }
-    
   };
 
   return (
@@ -116,7 +117,7 @@ export const TasksList = ({
           {...tasksVariants}
         >
           <AnimatePresence>{renderTasks(filteredTasks)}</AnimatePresence>
-          <m.div className="no-tasks-container">{!filteredTasks && renderImage()}</m.div>
+          <div className="no-tasks-container">{renderImage()}</div>
         </Reorder.Group>
       </div>
     </>

@@ -24,6 +24,11 @@ export const categories = [
       class: 'bg-yellow-400',
       name: 'Family',
     },
+    {
+      id: 6,
+      class: 'bg-orange-400',
+      name: 'Sport',
+    },
   ];
 
   const now = new Date();

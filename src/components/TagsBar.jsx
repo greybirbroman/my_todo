@@ -23,8 +23,8 @@ const TagsBar = ({
   };
 
   return (
-    <ul className='flex flex-col gap-2 text-gray-600'>
-      <span className='text-sm font-bold'>Tags:</span>
+    <ul className='flex flex-wrap gap-2 text-gray-600'>
+      {/* <span className='text-sm font-bold'>Tags:</span> */}
       {categories.map((category) => (
         <m.li
           variants={buttonVariants}

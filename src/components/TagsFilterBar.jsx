@@ -14,7 +14,7 @@ const TagsFilterBar = ({ selectedFilterTags, onTagFilter }) => {
 }
 
   return (
-    <ul className='justify-evenly text-gray-600 flex flex-wrap lg:flex-col gap-2 lg:min-w-[200px] lg:justify-start'>
+    <ul className='justify-center text-gray-600 flex flex-wrap lg:flex-col gap-2 lg:min-w-[200px] lg:justify-evenly'>
       {categories.map((category) => (
         <m.li
           variants={buttonVariants}
@@ -30,6 +30,7 @@ const TagsFilterBar = ({ selectedFilterTags, onTagFilter }) => {
           </button>
         </m.li>
       ))}
+      {/* <button>+</button> */}
     </ul>
   )
 }
