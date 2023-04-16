@@ -37,3 +37,44 @@ export const categories = [
     hover: { scale: 1.1 },
     tap: { scale: 0.9 },
   };
+
+  export const tasksVariants = {
+    initial: {
+      opacity: 0,
+      maxHeight: 0,
+    },
+    animate: {
+      opacity: 1,
+      maxHeight: 'auto'
+    },
+    transition: {
+      delay: 0.3
+    },
+    exit: {
+      opacity: 0,
+      maxHeight: 0,
+    },
+  }
+
+  export const setReorderConstraints = (itemRects) => {
+    let minTop = 0;
+    let maxTop = 0;
+    let minLeft = 0;
+    let maxLeft = 0;
+    
+    itemRects.forEach((rect) => {
+      minTop = Math.min(minTop, rect.top);
+      maxTop = Math.max(maxTop, rect.bottom);
+      minLeft = Math.min(minLeft, rect.left);
+      maxLeft = Math.max(maxLeft, rect.right);
+    });
+  
+    const constraints = {
+      top: minTop,
+      left: minLeft,
+      bottom: maxTop - itemRects[0].height,
+      right: maxLeft - itemRects[0].width,
+    };
+  
+    return constraints;
+  };

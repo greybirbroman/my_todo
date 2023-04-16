@@ -9,8 +9,7 @@ import TagsFilterBar from './components/TagsFilterBar';
 import SearchFilterField from './components/SearchFilterField';
 
 function App() {
-  const { tasks, addTask, deleteTask, toggleTaskStatus, updateTask } =
-    useTasks();
+  const { tasks, setTasks, addTask, deleteTask, toggleTaskStatus, updateTask } = useTasks();
   const [isModalAddOpen, setIsModalAddOpen] = useState(false); // Стейт для Модальных окон.
   const [isModalEditOpen, setIsModalEditOpen] = useState(false); // Стейт для Модальных окон.
   const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
@@ -21,14 +20,13 @@ function App() {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchTasks, setSearchTasks] = useState(tasks);
+  const [shouldAnimateNewTask, setShouldAnimateNewTask] = useState(false);
+
   const allTasks = tasks.length;
   const doneTasks = tasks.filter((task) => task.completed).length;
-  // const searchTasks = tasks.filter(
-  //   (task) =>
-  //     task.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-  //     task.description.toLowerCase().includes(searchQuery.toLowerCase())
-  // );
-
+  console.log(selectedTags);
+  console.log(activeTags)
+  
   // Этот эффект использует функцию setTimeout,
   // чтобы задержать обновление результатов поиска на 500 миллисекунд
   // после изменения searchQuery. Кроме того,
@@ -51,7 +49,11 @@ function App() {
 
   const addNewTask = (newTask) => {
     addTask(newTask);
+    setShouldAnimateNewTask(true)
     toggleAddModal();
+    setTimeout(() => {
+      setShouldAnimateNewTask(false)
+    }, 300)
   };
 
   const editTask = (editedTask) => {
@@ -97,8 +99,8 @@ function App() {
    
       {isModalEditOpen && (
         <EditTodoModal
-          isModalEditOpen={toggleEditModal}
-          onCancelClick={toggleEditModal}
+          isModalEditOpen={isModalEditOpen}
+          closeEditModal={toggleEditModal}
           onEdit={editTask}
           selectedTask={selectedTask}
           selectedTags={selectedTags}
@@ -124,14 +126,15 @@ function App() {
             searchQuery={searchQuery}
             setSearchQuery={setSearchQuery}
           />
-          <div className='flex gap-4 md:flex-col sm:flex-col justify-between w-full'>
+          <div className='flex gap-4 md:flex-col sm:flex-col justify-between h-fit'>
           <TagsFilterBar
             selectedFilterTags={selectedFilterTags}
             onTagFilter={handleTagFilter}
           />
           <TasksList
-            tasks={searchQuery !== '' ? searchTasks : tasks} // Если поисковая строка не пустая
-            onDelete={deleteTask} // отдаем на рендер массив найденых задач.
+            tasks={searchQuery !== '' ? searchTasks : tasks} // Если поисковая строка не пустая отдаем найденые задачи на рендер
+            setTasks={setTasks}                               
+            onDelete={deleteTask}
             onToggleTaskStatus={toggleTaskStatus}
             onEdit={toggleEditModal}
             setSelectedTask={setSelectedTask}
@@ -140,6 +143,7 @@ function App() {
             filter={filter}
             searchText={searchQuery}
             selectedFilterTags={selectedFilterTags}
+            shouldAnimateNewTask={shouldAnimateNewTask}
           />
           </div>
         </>

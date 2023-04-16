@@ -14,7 +14,7 @@ const SearchInput = ({onSearch, searchQuery, setSearchQuery}) => {
           id='search'
           name='search'
           value={searchQuery}
-          placeholder={'find todo...'}
+          placeholder={'find task...'}
           onChange={handleSearchChange}
           required
           autoComplete='off'

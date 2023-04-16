@@ -7,3 +7,13 @@
 *{
     font-family: 'Poppins', 'Helvetica', 'Arial', sans-serif;
 }
+
+.no-tasks-container {
+    grid-column: 1 / -1;
+  }
+
+  @media (min-width: 768px) {
+    .no-tasks-container {
+      grid-column: 1 / span 2;
+    }
+  }

@@ -1,4 +1,6 @@
-import { categories } from "../utils/const";
+import { categories } from '../utils/const';
+import { motion as m } from 'framer-motion';
+import { buttonVariants } from '../utils/const';
 
 const TagsBar = ({
   selectedTags,
@@ -24,7 +26,10 @@ const TagsBar = ({
     <ul className='flex flex-col gap-2 text-gray-600'>
       <span className='text-sm font-bold'>Tags:</span>
       {categories.map((category) => (
-        <li
+        <m.li
+          variants={buttonVariants}
+          whileHover='hover'
+          whileTap='tap'
           key={category.id}
           className={`flex py-2 px-2 gap-2 w-fit items-center shadow-md rounded-full cursor-pointer ${
             activeTags && activeTags.includes(category.id)
@@ -37,7 +42,7 @@ const TagsBar = ({
           <button type='button' key={category.id} className={`font-medium`}>
             {category.name}
           </button>
-        </li>
+        </m.li>
       ))}
     </ul>
   );

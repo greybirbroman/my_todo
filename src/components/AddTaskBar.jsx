@@ -6,9 +6,9 @@ const AddTaskBar = ({ onAddClick, allTasks, doneTasks }) => {
 
 
   return (
-    <div className='flex justify-between items-center sm:text-sm md:text-xl text-2xl py-5 px-5 bg-slate-200 rounded-lg'>
-      <h1>todo<span className='text-[#6469ff]'>'s</span></h1>
-      <span className='rounded-xl px-2 py-2 bg-slate-200'><span className='text-[#6469ff]'>{doneTasks}</span>/{allTasks} complete</span>
+    <div className='flex justify-between items-center sm:text-sm md:text-xl text-2xl py-5 px-5 bg-gradient-to-b from-white to-indigo-100 rounded-lg shadow-md'>
+      <h1 className='text-3xl'>todo<span className='text-[#6469ff]'>'s</span></h1>
+      <span className='rounded-xl px-2 py-2 bg-white shadow-inner'><span className='text-[#6469ff]'>{doneTasks}</span>/{allTasks} complete</span>
       <m.button
       variants={buttonVariants}
       whileHover="hover"

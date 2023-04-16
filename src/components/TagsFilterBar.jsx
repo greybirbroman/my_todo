@@ -1,5 +1,7 @@
-import React from 'react'
-import { categories } from '../utils/const'
+import React from 'react';
+import { categories } from '../utils/const';
+import { motion as m } from 'framer-motion';
+import { buttonVariants } from '../utils/const';
 
 const TagsFilterBar = ({ selectedFilterTags, onTagFilter }) => {
   console.log(`selected filter by tag ${selectedFilterTags}`)
@@ -14,7 +16,10 @@ const TagsFilterBar = ({ selectedFilterTags, onTagFilter }) => {
   return (
     <ul className='justify-evenly text-gray-600 flex flex-wrap lg:flex-col gap-2 lg:min-w-[200px] lg:justify-start'>
       {categories.map((category) => (
-        <li
+        <m.li
+          variants={buttonVariants}
+          whileHover="hover"
+          whileTap="tap"
           key={category.id}
           className={`flex py-2 px-2 gap-1 w-fit items-center rounded-full cursor-pointer shadow-md ${selectedFilterTags.includes(category.name) ? 'bg-yellow-200' : ''}`}
           onClick={() => handleTagClick(category.name)}
@@ -23,7 +28,7 @@ const TagsFilterBar = ({ selectedFilterTags, onTagFilter }) => {
           <button type='button' key={category.id} className={`lg:font-medium sm:font-normal lg:text-[18px] md:text-[14px] text-[12px]`}>
             {category.name}
           </button>
-        </li>
+        </m.li>
       ))}
     </ul>
   )

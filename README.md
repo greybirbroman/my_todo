@@ -1,70 +1,47 @@
-# Getting Started with Create React App
+<h1 align='center'>Advanced todo's (Pet-Project)</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+![react](https://img.shields.io/badge/React-F5F5F5?style=for-the-badge&logo=React&logoColor=#61DAFB)
+![tailwind](https://img.shields.io/badge/tailwind-F5F5F5?style=for-the-badge&logo=tailwindcss&logoColor=#61DAFB)
+![framer](https://img.shields.io/badge/framermotion-F5F5F5?style=for-the-badge&logo=Framer_motion&logoColor=#61DAFB)
+![mui](https://img.shields.io/badge/mui-F5F5F5?style=for-the-badge&logo=mui&logoColor=#61DAFB)
 
-## Available Scripts
+![screen](/Fotoram.io.jpg)
 
-In the project directory, you can run:
 
-### `npm start`
+<h3>Идея:</h3>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<p>Существует легенда, что у каждого разработчика, в портфолио должен быть todo list. Я решил эту легенду поддержать и так началась история этого проекта.</p>
+<p>После просмотра тонны вариантов с тем какие проекты предлагались на YouTube я пришел к выводу что мне мало этого функционала, они все были слишком простыми на мой взгляд и я стал пытаться позаимствовать идеи в дизайнерских макетах. Наконец, макет который лег в основу моего проекта был найден и я приступил к работе.</p>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+___
 
-### `npm test`
+<h3>Цель:</h3>
+<p>С самого начала я определил для себя целью "накрутить" в свой todo's как можно больше интересного и полезного функционала, поработать с новыми технологиями и закрепить навыки с теми с которыми уже работал.</p>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+___
+<h3>Мой проект:</h3>
+<p>Мой проект todo's это моя новая персональная гордость. Я получил огромное удовольствие от разработки. Одноременно старался сделать простой, лаконичный и понятный пользователю интерфейс. </p>
 
-### `npm run build`
+Функционал:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- CRUD
+- Drag and Drop Tasks
+- Tasks окрашиваются в цвет в соответствии с ее приоритетом
+- Пользователь может добавить теги к своим задачам
+- SearchBar для поиска задач
+- Filter Tasks by Tags or Priority
+- Адаптивность
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+___
+<h3>Планы по доработке:</h3>
+<p>Проект будет постоянно обновляться и дорабатываться.</p>
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Добавить пользователю возможность прикреплять документы к задаче
+- Улучшить UI
+- Добавить Backend с базой данных для хранения задач
+- Добавить авторизацию и регистрацию
+- Добавить делегирование задач для других пользователей
+- Комментарии к задачам других пользователей?
+- Добавить возможность персонализировать категории
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
