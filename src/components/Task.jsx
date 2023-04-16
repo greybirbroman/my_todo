@@ -1,8 +1,7 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 import CheckboxLabel from './CheckboxLabel';
 import TaskSettings from './TaskSettings';
 import { motion as m } from 'framer-motion';
-
 
 const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
   const { description, title, id, category, priority, completed, createdAt } =

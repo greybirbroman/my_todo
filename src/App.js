@@ -7,6 +7,7 @@ import EditTodoModal from './components/EditTodoModal';
 import TasksList from './components/TasksList';
 import TagsFilterBar from './components/TagsFilterBar';
 import SearchFilterField from './components/SearchFilterField';
+import { ToastContainer } from 'react-toastify';
 
 function App() {
   const { tasks, setTasks, addTask, deleteTask, toggleTaskStatus, updateTask } = useTasks();
@@ -20,7 +21,7 @@ function App() {
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchTasks, setSearchTasks] = useState(tasks);
-  const [shouldAnimateNewTask, setShouldAnimateNewTask] = useState(false);
+  
 
   const allTasks = tasks.length;
   const doneTasks = tasks.filter((task) => task.completed).length;
@@ -49,11 +50,7 @@ function App() {
 
   const addNewTask = (newTask) => {
     addTask(newTask);
-    setShouldAnimateNewTask(true)
     toggleAddModal();
-    setTimeout(() => {
-      setShouldAnimateNewTask(false)
-    }, 300)
   };
 
   const editTask = (editedTask) => {
@@ -96,8 +93,6 @@ function App() {
           priority={priority}
           setPriority={setPriority}
         />
-   
-      {isModalEditOpen && (
         <EditTodoModal
           isModalEditOpen={isModalEditOpen}
           closeEditModal={toggleEditModal}
@@ -109,9 +104,7 @@ function App() {
           setActiveTags={setActiveTags}
           priority={priority}
           setPriority={setPriority}
-        
         />
-      )}
         <>
           <AddTaskBar
             onAddClick={toggleAddModal}
@@ -143,9 +136,9 @@ function App() {
             filter={filter}
             searchText={searchQuery}
             selectedFilterTags={selectedFilterTags}
-            shouldAnimateNewTask={shouldAnimateNewTask}
           />
           </div>
+            <ToastContainer />
         </>
     </div>
   );

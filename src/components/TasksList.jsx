@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 import Task from './Task';
 import noTask from '../images/no-task.png';
 import { setReorderConstraints, tasksVariants } from '../utils/const';
-import { AnimatePresence, Reorder } from 'framer-motion';
+import { motion as m, AnimatePresence, Reorder } from 'framer-motion';
 
 export const TasksList = ({
   tasks,
@@ -15,6 +15,7 @@ export const TasksList = ({
   filter,
   selectedFilterTags,
 }) => {
+
 
   const filteredTasks = useMemo(() => {
     let filtered = tasks;
@@ -100,11 +101,13 @@ export const TasksList = ({
         );
       });
     }
+    
   };
 
   return (
     <>
-      <div className='w-full h-[100%]'>
+      <div
+      className='w-full h-[100%]'>
         <Reorder.Group
           className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 lg:gap-5'
           as='ul'
@@ -113,7 +116,7 @@ export const TasksList = ({
           {...tasksVariants}
         >
           <AnimatePresence>{renderTasks(filteredTasks)}</AnimatePresence>
-          <div className="no-tasks-container">{!filteredTasks.length && renderImage()}</div>
+          <m.div className="no-tasks-container">{!filteredTasks && renderImage()}</m.div>
         </Reorder.Group>
       </div>
     </>

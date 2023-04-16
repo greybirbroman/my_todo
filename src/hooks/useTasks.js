@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { showToast } from '../utils/motion';
 
 const useTasks = () => {
   const [tasks, setTasks] = useState([]);
@@ -27,6 +28,7 @@ const useTasks = () => {
       localStorage.setItem('tasks', JSON.stringify(newTasks));
       return newTasks;
     });
+    showToast('Task added successfully!')
   };
 
   const deleteTask = (id) => {
@@ -35,6 +37,7 @@ const useTasks = () => {
       localStorage.setItem('tasks', JSON.stringify(newTasks));
       return newTasks;
     });
+    showToast('Task deleted successfully!')
   };
 
   const updateTask = (updatedTask) => {
@@ -45,6 +48,7 @@ const useTasks = () => {
       localStorage.setItem('tasks', JSON.stringify(newTasks));
       return newTasks;
     });
+    showToast('Task updated successfully!')
   };
 
   const toggleTaskStatus = (taskId) => {

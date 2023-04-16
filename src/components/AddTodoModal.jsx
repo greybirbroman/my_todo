@@ -46,12 +46,15 @@ const AddTodoModal = ({
       <AnimatePresence>
         {isModalAddOpen && (
           <div
-            className={`fixed z-50 inset-0 flex justify-center items-center`}
+            className={`z-50 inset-0 flex justify-center items-center fixed`}
           >
-            <div
+            <m.div
+             initial={{ opacity: 0 }}
+             animate={{ opacity: 1}}
+             exit={{ opacity: 0 }}
               className='bg-black bg-opacity-50 absolute inset-0 backdrop-blur-[3px]'
               onClick={closeAddModal}
-            ></div>
+            ></m.div>
             <m.div
               initial={{ opacity: 0, y: -150 }}
               animate={{ opacity: 1, y: 0 }}
@@ -91,7 +94,7 @@ const AddTodoModal = ({
                 </div>
                 <label className='text-[14px] mb-2'>Title</label>
                 <input
-                  className='w-full border border-gray-600 text-gray-900 text-sm rounded-md focus:ring-[#4649ff] focus:border-[#4649ff] focus:border outline-none p-3'
+                  className='mb-2 w-full border border-gray-600 text-gray-900 text-sm rounded-md focus:ring-[#4649ff] focus:border-[#4649ff] focus:border outline-none p-3'
                   onChange={handleChange}
                   type='text'
                   name='title'
@@ -125,6 +128,7 @@ const AddTodoModal = ({
           </div>
         )}
       </AnimatePresence>
+      {/* <ToastContainer/> */}
     </>
   );
 };

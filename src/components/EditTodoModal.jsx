@@ -34,16 +34,19 @@ const EditTodoModal = ({
   }
 
   // При открытии попапа задаем значения в поля формы из вызванной Task. Отмечаем Tags поставленные пользователем.
+
   useEffect(() => {
-    setValues({
-      title: selectedTask.title,
-      description: selectedTask.description,
-    });
-    setSelectedTags(selectedTask.category);
-    const activeTags = selectedTask.category.map((tag) => tag.id);
-    setActiveTags(activeTags);
-    setPriority(selectedTask.priority);
-  }, [selectedTask]);
+    if(selectedTask) {
+      setValues({
+        title: selectedTask.title || '',
+        description: selectedTask.description || '',
+      });
+      setSelectedTags(selectedTask.category || []);
+      const activeTags = selectedTask.category.map((tag) => tag.id);
+      setActiveTags(activeTags || []);
+      setPriority(selectedTask.priority || '');
+    }
+  }, [isModalEditOpen]);
 
   return (
     <>
@@ -90,7 +93,7 @@ const EditTodoModal = ({
                 </div>
                 <label className='text-[14px] mb-2'>Title</label>
                 <input
-                  className='w-full border border-gray-600 text-gray-900 text-sm rounded-md focus:ring-[#4649ff] focus:border-[#4649ff] focus:border outline-none p-3'
+                  className='mb-2 w-full border border-gray-600 text-gray-900 text-sm rounded-md focus:ring-[#4649ff] focus:border-[#4649ff] focus:border outline-none p-3'
                   onChange={handleChange}
                   type='text'
                   name='title'

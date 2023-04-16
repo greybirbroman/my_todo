@@ -5,7 +5,7 @@
 ![framer](https://img.shields.io/badge/framermotion-F5F5F5?style=for-the-badge&logo=Framer_motion&logoColor=#61DAFB)
 ![mui](https://img.shields.io/badge/mui-F5F5F5?style=for-the-badge&logo=mui&logoColor=#61DAFB)
 
-![screen](/Fotoram.io.jpg)
+![screen](/readme_screen.jpg)
 
 
 <h3>Идея:</h3>
