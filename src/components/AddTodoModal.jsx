@@ -1,10 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { useFormWithValidation } from '../hooks/useForm';
 import TagsBar from './TagsBar';
 import PriorityBar from './PriorityBar';
 import { AnimatePresence, motion as m } from 'framer-motion';
 import { buttonVariants } from '../utils/const';
+
+
 
 const AddTodoModal = ({
   closeAddModal,
@@ -113,6 +115,7 @@ const AddTodoModal = ({
                   value={values.description || ''}
                   rows='5'
                 ></textarea>
+            
                 {/* { Tags&PriorityArea } */}
                 <div className='flex justify-between mt-8'>
                   <TagsBar
