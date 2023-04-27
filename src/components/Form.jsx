@@ -1,10 +1,8 @@
 import React from 'react';
 import { motion as m } from 'framer-motion';
 import { buttonVariants } from '../utils/const';
-import { useFormWithValidation } from '../hooks/useForm';
 
-const Form = ({ onSubmit, onCloseModal, children }) => {
-  const { isValid } = useFormWithValidation();
+const Form = ({ onSubmit, onCloseModal, submitButtonName, isValid, children }) => {
 
   return (
     <form className='flex flex-col' onSubmit={onSubmit}>
@@ -28,14 +26,13 @@ const Form = ({ onSubmit, onCloseModal, children }) => {
               ? 'text-gray-300 border-gray-300'
               : 'text-gray-700 border-[#6469ff]'
           } py-2 px-2 rounded-xl font-semibold border`}
-          type='button'
-          onClick={onSubmit}
+          type='sumbit'
           disabled={!isValid}
         >
-          Add
+          {submitButtonName}
         </m.button>
-        {children}
       </div>
+        {children}
     </form>
   );
 };
