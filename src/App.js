@@ -8,6 +8,7 @@ import TasksList from './components/TasksList';
 import TagsFilterBar from './components/TagsFilterBar';
 import SearchFilterField from './components/SearchFilterField';
 import { ToastContainer } from 'react-toastify';
+import Modal from './components/Modal';
 
 function App() {
   const { tasks, setTasks, addTask, deleteTask, toggleTaskStatus, updateTask } = useTasks();

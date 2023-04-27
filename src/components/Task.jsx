@@ -73,7 +73,7 @@ const Task = ({ task, onDelete, onToggleStatus, onEdit, setSelectedTask }) => {
             <li key={tag.id} className='w-fit list-none font-light'>
               <div className='flex items-center text-[12px] font-normal'>
                 <div
-                  className={`w-5 h-5 rounded-full flex items-center justify-center border border-gray-600 ${tag.class}`}
+                  className={`w-5 h-5 rounded-full flex items-center justify-center ring-2 ring-white ${tag.class}`}
                 ></div>
               </div>
             </li>
