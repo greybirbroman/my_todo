@@ -2,23 +2,26 @@ import { categories } from '../utils/const';
 import { motion as m } from 'framer-motion';
 import { buttonVariants } from '../utils/const';
 
-const TagsBar = ({
-  selectedTags,
-  setSelectedTags,
-  activeTags,
-  setActiveTags,
-}) => {
+const TagsBar = ({ selectedTags, setSelectedTags }) => {
+  // const handleClick = (category) => {
+  //   const tagIndex = activeTags.indexOf(category.id);
+  //   if (tagIndex === -1) {
+  //     setActiveTags([...activeTags, category.id]);
+  //     setSelectedTags([...selectedTags, category]);
+  //   } else {
+  //     const newActiveTags = [...activeTags];
+  //     newActiveTags.splice(tagIndex, 1);
+  //     setActiveTags(newActiveTags);
+  //     const newTags = selectedTags.filter((tag) => tag.id !== category.id);
+  //     setSelectedTags(newTags);
+  //   }
+  // };
+
   const handleClick = (category) => {
-    const tagIndex = activeTags.indexOf(category.id);
-    if (tagIndex === -1) {
-      setActiveTags([...activeTags, category.id]);
-      setSelectedTags([...selectedTags, category]);
+    if (selectedTags.find((tag) => tag.id === category.id)) {
+      setSelectedTags(selectedTags.filter((tag) => tag.id !== category.id));
     } else {
-      const newActiveTags = [...activeTags];
-      newActiveTags.splice(tagIndex, 1);
-      setActiveTags(newActiveTags);
-      const newTags = selectedTags.filter((tag) => tag.id !== category.id);
-      setSelectedTags(newTags);
+      setSelectedTags([...selectedTags, category]);
     }
   };
 
@@ -32,7 +35,7 @@ const TagsBar = ({
           whileTap='tap'
           key={category.id}
           className={`flex py-2 px-2 gap-2 w-fit items-center shadow-md rounded-full cursor-pointer ${
-            activeTags && activeTags.includes(category.id)
+            selectedTags && selectedTags.some((tag) => tag.id === category.id)
               ? 'bg-yellow-200'
               : 'bg-white'
           }`}

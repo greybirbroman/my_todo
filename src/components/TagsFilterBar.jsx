@@ -4,7 +4,6 @@ import { motion as m } from 'framer-motion';
 import { buttonVariants } from '../utils/const';
 
 const TagsFilterBar = ({ selectedFilterTags, onTagFilter }) => {
-  console.log(`selected filter by tag ${selectedFilterTags}`)
   const handleTagClick = (tag) => {
     if (selectedFilterTags.includes(tag)) {
       onTagFilter(selectedFilterTags.filter((t) => t !== tag));
@@ -21,7 +20,7 @@ const TagsFilterBar = ({ selectedFilterTags, onTagFilter }) => {
           whileHover="hover"
           whileTap="tap"
           key={category.id}
-          className={`flex py-2 px-2 gap-1 w-fit items-center rounded-full cursor-pointer shadow-md ${selectedFilterTags.includes(category.name) ? 'bg-yellow-200' : ''}`}
+          className={`flex py-2 px-2 gap-1 w-fit items-center rounded-full cursor-pointer shadow-md bg-slate-50 ${selectedFilterTags.includes(category.name) ? 'bg-yellow-200' : ''}`}
           onClick={() => handleTagClick(category.name)}
         >
           <div className={`h-5 w-5 rounded-full ${category.class}`}></div>
@@ -30,7 +29,6 @@ const TagsFilterBar = ({ selectedFilterTags, onTagFilter }) => {
           </button>
         </m.li>
       ))}
-      {/* <button>+</button> */}
     </ul>
   )
 }

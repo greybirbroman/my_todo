@@ -13,7 +13,7 @@ const AddTaskBar = ({ onAddClick, allTasks, doneTasks }) => {
       variants={buttonVariants}
       whileHover="hover"
       whileTap="tap"
-      className='font-normal border-2 border-[#6469ff] shadow-md px-2 py-2 rounded-xl' onClick={onAddClick}>
+      className='font-normal px-2 py-2 rounded-xl shadow-md bg-slate-50 text-[#6469ff] hover:text-white hover:bg-[#6469ff]' onClick={onAddClick}>
         new task
       </m.button>
     </div>

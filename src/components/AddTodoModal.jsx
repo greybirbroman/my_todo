@@ -16,8 +16,6 @@ const AddTodoModal = ({
   onAddClick,
   selectedTags,
   setSelectedTags,
-  activeTags,
-  setActiveTags,
   priority,
   setPriority,
 }) => {
@@ -26,7 +24,6 @@ const AddTodoModal = ({
   // При открытии попапа сбрасываем состояние тегов и приоритет задачи
   useEffect(() => {
     setSelectedTags([]);
-    setActiveTags([]);
     setPriority('low');
     resetForm();
   }, [isModalAddOpen]);
@@ -41,6 +38,7 @@ const AddTodoModal = ({
       category: selectedTags,
       priority: priority,
       createdAt: new Date(),
+      owner: 'John Doe'
     };
     onAddClick(newTask);
     resetForm();
@@ -55,17 +53,18 @@ const AddTodoModal = ({
             onCloseModal={closeAddModal}
             submitButtonName={'Add'}
             isValid={isValid}
+            isDisabled={!isValid}
           >
             <Input
               name={'title'}
-              value={values.title}
+              value={values.title || ''}
               label={'Title'}
               placeholder={'Your title...'}
               onChange={handleChange}
             />
             <TextArea
               name={'description'}
-              value={values.description}
+              value={values.description || ''}
               label={'Description'}
               placeholder={'Your description...'}
               onChange={handleChange}
@@ -74,8 +73,6 @@ const AddTodoModal = ({
               <TagsBar
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
-                setActiveTags={setActiveTags}
-                activeTags={activeTags}
               />
               <PriorityBar priority={priority} setPriority={setPriority} />
             </div>
