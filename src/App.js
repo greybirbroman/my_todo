@@ -8,6 +8,7 @@ import TasksList from './components/TasksList';
 import TagsFilterBar from './components/TagsFilterBar';
 import SearchFilterField from './components/SearchFilterField';
 import { ToastContainer } from 'react-toastify';
+import Modal from './components/Modal';
 
 function App() {
   const { tasks, setTasks, addTask, deleteTask, toggleTaskStatus, updateTask } = useTasks();
@@ -80,6 +81,7 @@ function App() {
   }
 
   return (
+<>
     <div className='text-gray-700 py-5 px-10 md:px-5 sm:px-2 flex mx-auto flex-col max-w-[1280px] min-w-[400px] space-y-3 bg-white min-h-[100vh]'>
 
         <AddTodoModal
@@ -141,6 +143,7 @@ function App() {
             <ToastContainer />
         </>
     </div>
+    </>
   );
 }
 
