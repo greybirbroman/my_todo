@@ -1,9 +1,13 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion as m } from 'framer-motion';
 import { buttonVariants } from '../utils/const';
 
-const Form = ({ onSubmit, onCloseModal, submitButtonName, isValid, children }) => {
+const Form = ({ onSubmit, onCloseModal, submitButtonName, isValid, children, isDisabled }) => {
 
+  useEffect(() => {
+    console.log("isDisabled changed to:", isDisabled);
+  }, [isDisabled]); 
+  
   return (
     <form className='flex flex-col' onSubmit={onSubmit}>
       <div className='flex justify-between pb-10'>
@@ -27,7 +31,7 @@ const Form = ({ onSubmit, onCloseModal, submitButtonName, isValid, children }) =
               : 'text-gray-700 border-[#6469ff]'
           } py-2 px-2 rounded-xl font-semibold border`}
           type='sumbit'
-          disabled={!isValid}
+          disabled={!isValid || isDisabled}
         >
           {submitButtonName}
         </m.button>

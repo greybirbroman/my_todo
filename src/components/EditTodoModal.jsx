@@ -14,8 +14,6 @@ const EditTodoModal = ({
   selectedTask,
   selectedTags,
   setSelectedTags,
-  activeTags,
-  setActiveTags,
   priority,
   setPriority,
 }) => {
@@ -40,13 +38,11 @@ const EditTodoModal = ({
   useEffect(() => {
     if (selectedTask) {
       setValues({
-        title: selectedTask.title || '',
-        description: selectedTask.description || '',
+        title: selectedTask.title,
+        description: selectedTask.description,
       });
       setSelectedTags(selectedTask.category || []);
-      const activeTags = selectedTask.category.map((tag) => tag.id);
-      setActiveTags(activeTags || []);
-      setPriority(selectedTask.priority || '');
+      setPriority(selectedTask.priority);
     }
   }, [isModalEditOpen]);
 
@@ -59,17 +55,18 @@ const EditTodoModal = ({
           onCloseModal={closeEditModal}
           submitButtonName={'Edit'}
           isValid={isValid}
+          isDisabled={false}
           >
             <Input
               name={'title'}
-              value={values.title}
+              value={values.title || ''}
               label={'Title'}
               placeholder={'Your title...'}
               onChange={handleChange}
             />
             <TextArea
               name={'description'}
-              value={values.description}
+              value={values.description || ''}
               label={'Description'}
               placeholder={'Your description...'}
               onChange={handleChange}
@@ -78,8 +75,6 @@ const EditTodoModal = ({
               <TagsBar
                 selectedTags={selectedTags}
                 setSelectedTags={setSelectedTags}
-                setActiveTags={setActiveTags}
-                activeTags={activeTags}
               />
               <PriorityBar priority={priority} setPriority={setPriority} />
             </div>

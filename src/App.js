@@ -8,7 +8,6 @@ import TasksList from './components/TasksList';
 import TagsFilterBar from './components/TagsFilterBar';
 import SearchFilterField from './components/SearchFilterField';
 import { ToastContainer } from 'react-toastify';
-import Modal from './components/Modal';
 
 function App() {
   const { tasks, setTasks, addTask, deleteTask, toggleTaskStatus, updateTask } = useTasks();
@@ -17,17 +16,13 @@ function App() {
   const [selectedTask, setSelectedTask] = useState(null); // Стейт для отслеживания карточки на которой произошло событие.
   const [selectedTags, setSelectedTags] = useState([]); // Стейт хранения выбранных категорий для AddModal и EditModal.
   const [selectedFilterTags, setSelectedFilterTags] = useState([]); // Стейт для хранения категорий в TagsFilterBar.
-  const [activeTags, setActiveTags] = useState([]);
   const [priority, setPriority] = useState('');
   const [filter, setFilter] = useState('all');
   const [searchQuery, setSearchQuery] = useState('');
   const [searchTasks, setSearchTasks] = useState(tasks);
-  
-
   const allTasks = tasks.length;
   const doneTasks = tasks.filter((task) => task.completed).length;
-  console.log(selectedTags);
-  console.log(activeTags)
+  
   
   // Этот эффект использует функцию setTimeout,
   // чтобы задержать обновление результатов поиска на 500 миллисекунд
@@ -90,8 +85,6 @@ function App() {
           onAddClick={addNewTask}
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
-          activeTags={activeTags}
-          setActiveTags={setActiveTags}
           priority={priority}
           setPriority={setPriority}
         />
@@ -102,8 +95,6 @@ function App() {
           selectedTask={selectedTask}
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
-          activeTags={activeTags}
-          setActiveTags={setActiveTags}
           priority={priority}
           setPriority={setPriority}
         />

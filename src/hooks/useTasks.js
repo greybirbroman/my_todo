@@ -9,7 +9,6 @@ const useTasks = () => {
   // Полученные задачи устанавливаются в состояние tasks, используя функцию setTasks
   useEffect(() => {
     const storedTasks = JSON.parse(localStorage.getItem('tasks'));
-
     if (storedTasks && storedTasks.length) {
       setTasks(storedTasks);
     }
